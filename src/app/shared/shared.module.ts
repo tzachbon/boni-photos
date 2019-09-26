@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeatureBoxComponent } from './ui/feature-box/feature-box.component';
 import { ProductCardComponent } from './ui/product-card/product-card.component';
 import { SocialMediaButtonComponent } from './ui/social-media-button/social-media-button.component';
+import { InViewportModule } from 'ng-in-viewport';
 
 
 
@@ -14,13 +15,16 @@ import { SocialMediaButtonComponent } from './ui/social-media-button/social-medi
     CommonModule,
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    InViewportModule
   ],
   exports: [
     MaterialModule,
     FeatureBoxComponent,
     ProductCardComponent,
-    SocialMediaButtonComponent
+    SocialMediaButtonComponent,
+    InViewportModule
+
   ]
 })
 export class SharedModule { }

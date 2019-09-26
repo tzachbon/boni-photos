@@ -9,7 +9,7 @@ import { NavbarComponent } from './container/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './container/products/products.module';
 import { ContactUsModule } from './container/contact-us/contact-us.module';
-
+import { MnFullpageModule } from 'ngx-fullpage';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { ContactUsModule } from './container/contact-us/contact-us.module';
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
     SharedModule,
-
+    MnFullpageModule.forRoot(),
 
     // Container Modules
     LandModule,

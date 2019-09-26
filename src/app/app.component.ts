@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { SectionService, ISection } from './shared/services/section.service';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { ISection, SectionService } from './shared/services/section.service';
 
 @Component({
   selector: 'app-root',
@@ -22,21 +22,21 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
 
-  scrollToSection() {
-    this.handlerSectionSmoothness();
-    this.currentSection.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
-  }
+  // scrollToSection() {
+  //   this.handlerSectionSmoothness();
+  //   this.currentSection.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
+  // }
 
-  handlerSectionSmoothness() {
-    this.sectionsReady = false;
-    setTimeout(() => {
-      this.canEnter = true;
-      this.sectionsReady = true;
-    }, 1000);
-  }
+  // handlerSectionSmoothness() {
+  //   this.sectionsReady = false;
+  //   setTimeout(() => {
+  //     this.canEnter = true;
+  //     this.sectionsReady = true;
+  //   }, 1000);
+  // }
 
   ngOnInit() {
-    this.iniSectionsObservable();
+    // this.iniSectionsObservable();
   }
 
   iniSectionsObservable() {

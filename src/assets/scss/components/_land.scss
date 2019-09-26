@@ -1,53 +1,69 @@
 @import "./../import";
 
 .land-container {
-  width : 100%;
+  width: 100%;
   height: 100vh;
-  background-image: linear-gradient(to right bottom,
-      rgba($color-primary, 0.5), rgba($color-accent, 0.1)),
-    url('src/assets/images/land.jpg');
+  background-image: linear-gradient(to right bottom, rgba($color-primary, 0.7), rgba($color-accent, 0.4)),
+    url("src/assets/images/land.jpeg");
   // clip-path            : polygon(0 12%, 100% 12%, 100% 88%, 0 88%);
-  position             : relative;
-  transition           : all 1s ease-in-out;
-  z-index              : 0;
+  position: relative;
+  transition: all 1s ease-in-out;
+  z-index: 0;
   background-attachment: fixed;
-  background-repeat    : no-repeat;
-  background-size      : cover;
+  background-repeat: no-repeat;
+  background-size: cover;
   @extend .movingBackground;
-
 }
 
-.land-bottom-text {
-  color     : #fff;
-  position  : absolute;
-  top       : 28%;
-  right     : 2%;
-  z-index   : 2;
-  font-size : 3rem;
-  width     : 50rem;
+.sub-logo {
+  position: absolute;
+  left: 10%;
+  bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 10rem;
+  color: #fff;
+
+  .first,
+  .second {
+    opacity: 0;
+    animation: slideLeft 3s ease-out forwards;
+  }
+
+  .first {
+    animation-delay: 0.25s;
+  }
+
+  .second {
+    animation-delay: 1.25s;
+  }
+}
+
+.land-title-text {
+  color: #fff;
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  z-index: 2;
   text-align: center;
 
   .title {
     @include flex-center;
-    margin                 : 1rem 0;
-    font-family            : 'Montserrat', sans-serif;
-    background             : linear-gradient(to right, lighten($color-accent, 20), $color-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation              : slideRightWithLetterSpacing 2s ease-out forwards;
+    position: relative;
+    margin: 1rem 0;
+    font-family: "Montserrat", sans-serif;
+    animation: slideRightWithLetterSpacing 2s ease-out forwards;
+    color: #fff;
 
     &__text {
-      font-family            : 'Montserrat', sans-serif;
-      background             : linear-gradient(to right, lighten($color-accent, 20), $color-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size              : 10rem;
-      animation              : movingBackgroundLinear 1s ease infinite;
-
+      font-family: "Montserrat", sans-serif;
+      font-size: 3rem;
+      animation: movingBackgroundLinear 1s ease infinite;
     }
 
     .mat-18 {
-      font-size: 6rem;
+      font-size: 2.5rem;
     }
   }
 
@@ -64,7 +80,8 @@
   // }
 }
 
-
 @media (max-width: 550px) {
-
+  .sub-logo {
+    font-size: 5rem;
+  }
 }
