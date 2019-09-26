@@ -1,0 +1,70 @@
+@import "./../import";
+
+.land-container {
+  width : 100%;
+  height: 100vh;
+  background-image: linear-gradient(to right bottom,
+      rgba($color-primary, 0.5), rgba($color-accent, 0.1)),
+    url('src/assets/images/land.jpg');
+  // clip-path            : polygon(0 12%, 100% 12%, 100% 88%, 0 88%);
+  position             : relative;
+  transition           : all 1s ease-in-out;
+  z-index              : 0;
+  background-attachment: fixed;
+  background-repeat    : no-repeat;
+  background-size      : cover;
+  @extend .movingBackground;
+
+}
+
+.land-bottom-text {
+  color     : #fff;
+  position  : absolute;
+  top       : 28%;
+  right     : 2%;
+  z-index   : 2;
+  font-size : 3rem;
+  width     : 50rem;
+  text-align: center;
+
+  .title {
+    @include flex-center;
+    margin                 : 1rem 0;
+    font-family            : 'Montserrat', sans-serif;
+    background             : linear-gradient(to right, lighten($color-accent, 20), $color-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation              : slideRightWithLetterSpacing 2s ease-out forwards;
+
+    &__text {
+      font-family            : 'Montserrat', sans-serif;
+      background             : linear-gradient(to right, lighten($color-accent, 20), $color-accent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size              : 10rem;
+      animation              : movingBackgroundLinear 1s ease infinite;
+
+    }
+
+    .mat-18 {
+      font-size: 6rem;
+    }
+  }
+
+  .feature-box-container {
+    @include flex-center;
+    flex-wrap: wrap;
+  }
+
+  // .paragraph {
+  //   transform  : translateX(120%);
+  //   animation  : slideRight 1s 2s ease-out forwards;
+  //   direction  : rtl;
+  //   line-height: 3.3rem;
+  // }
+}
+
+
+@media (max-width: 550px) {
+
+}

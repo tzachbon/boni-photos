@@ -1,0 +1,146 @@
+// Components:
+
+
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+
+
+
+
+
+
+$main-color:(50 : #eaf4ff,
+  100 : #cce3ff,
+  200 : #aad0ff,
+  300 : #87bdff,
+  400 : #6eaeff,
+  500 : #54a0ff,
+  600 : #4d98ff,
+  700 : #438eff,
+  800 : #3a84ff,
+  900 : #2973ff,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #d6e3ff,
+  A700 : #bdd2ff,
+  contrast: (50 : #fff,
+    100 : #fff,
+    200 : #fff,
+    300 : #fff,
+    400 : #fff,
+    500 : #fff,
+    600 : #fff,
+    700 : #fff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+
+$second-color: (50 : #e1f4f4,
+  100 : #b3e3e4,
+  200 : #80d1d2,
+  300 : #4dbfbf,
+  400 : #27b1b2,
+  500 : #01a3a4,
+  600 : #019b9c,
+  700 : #019192,
+  800 : #018889,
+  900 : #007778,
+  A100 : #a6feff,
+  A200 : #73feff,
+  A400 : #40fdff,
+  A700 : #26fdff,
+  contrast: (50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  ));
+
+
+
+$boni-primary : mat-palette($main-color);
+$boni-accent  : mat-palette($second-color, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$boni-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$boni-theme: mat-light-theme($boni-primary, $boni-accent, $boni-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($boni-theme);
+
+/* You can add global styles to this file, and also import other style files */
+*,
+*::after,
+*::before {
+  padding   : 0;
+  margin    : 0;
+  box-sizing: inherit;
+  outline   : none;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family                : 'M PLUS Rounded 1c', sans-serif;
+  box-sizing                 : border-box;
+  -webkit-user-select        : none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout      : none;
+}
+
+img {
+  align-self: center
+}
+
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
+}
+
+
+
+@import "./assets/scss/import";
+@import "./assets/scss/components/land";
+@import "./assets/scss/components/feature-box";
+@import "./assets/scss/components/products";
+@import "./assets/scss/components/card";
+@import "./assets/scss/components/contact-us";

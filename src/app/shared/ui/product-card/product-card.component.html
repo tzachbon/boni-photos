@@ -1,0 +1,11 @@
+<mat-card class="product">
+  <img class="image" [src]="product.image" [alt]="product.title" />
+  <div class="product__title">
+    <span>{{ product.title }}</span>
+  </div>
+  <ul class="product__data">
+    <li class="product__data-item" *ngFor="let package of product.packages">
+      {{ package }}
+    </li>
+  </ul>
+</mat-card>

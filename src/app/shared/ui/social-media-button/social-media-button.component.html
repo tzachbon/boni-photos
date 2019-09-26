@@ -1,0 +1,11 @@
+<button
+  mat-button
+  class="social-media-button"
+  [ngStyle]="{
+    background: socialMedia.color,
+    color: socialMedia.fontColor ? socialMedia.fontColor : 'black'
+  }"
+  (click)="onClick()"
+>
+  {{ socialMedia.title }}
+</button>

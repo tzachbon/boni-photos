@@ -1,0 +1,11 @@
+<div class="contact-us-container" #section>
+  <div class="contact-us-card">
+    <div class="form"></div>
+    <div class="social-media">
+      <app-social-media-button
+        *ngFor="let socialMediaButton of socialMediaButtons"
+        [socialMedia]="socialMediaButton"
+      ></app-social-media-button>
+    </div>
+  </div>
+</div>

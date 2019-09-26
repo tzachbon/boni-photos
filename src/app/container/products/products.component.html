@@ -1,0 +1,8 @@
+<div class="products-container" #section>
+  <div class="products-container__background"></div>
+  <div class="cards-container">
+    <ng-container *ngFor="let product of products">
+      <app-product-card [product]="product"></app-product-card>
+    </ng-container>
+  </div>
+</div>

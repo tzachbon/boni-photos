@@ -1,0 +1,14 @@
+<div class="land-container" #section>
+  <div class="land-bottom-text">
+    <h1 class="title">
+      <span class="title__text">Boni</span>
+      <mat-icon class="mat-18"> monochrome_photos</mat-icon>
+    </h1>
+    <div class="feature-box-container">
+      <app-feature-box
+        *ngFor="let text of featureBoxes"
+        [text]="text"
+      ></app-feature-box>
+    </div>
+  </div>
+</div>

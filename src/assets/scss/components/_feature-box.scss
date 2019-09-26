@@ -1,0 +1,63 @@
+@import "../import";
+
+$size: 18rem;
+
+.feature-box {
+  @include flex-center;
+  position  : relative;
+  font-size : 2rem;
+  width     : $size;
+  height    : $size /1.5;
+  font-size : auto;
+  margin    : 1rem;
+  transition: all .3s ease-in-out;
+  border-top: .5rem solid $color-accent;
+
+  &::after {
+    content         : "";
+    position        : absolute;
+    bottom          : 0;
+    left            : 0;
+    width           : 100%;
+    height          : 100%;
+    transform       : scaleY(0);
+    transform-origin: top center;
+    background      : linear-gradient(to bottom, $color-accent, lighten($color-accent, 10));
+    z-index         : -1;
+    transition      : transform 0.3s;
+  }
+
+  &:hover::after {
+    transform: scaleY(1);
+  }
+
+  &__backdrop {
+    position  : absolute;
+    width     : $size;
+    height    : $size /1.5;
+    background: $color-accent;
+    transition: all .3s ease-in-out;
+    transform : scaleY(0);
+    z-index   : 0;
+  }
+
+  &__text {
+    z-index       : 1;
+    color         : $color-accent;
+    margin        : auto;
+    text-align    : center;
+    vertical-align: middle;
+  }
+
+
+
+  &:hover &__backdrop {
+    // transform: scaleY(1);
+  }
+
+  &:hover &__text {
+    color: #000;
+  }
+
+
+}
