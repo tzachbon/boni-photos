@@ -1,49 +1,85 @@
 .contact-us-container {
-  height: 100vh;
-  width: 100%;
+  height    : 100vh;
+  width     : 100%;
   background: #fff;
+  position  : relative;
 
   background-repeat: no-repeat;
   @include flex-center;
   transition: all 0.3s linear;
 
   .contact-us-card {
-    position: relative;
-    width: 70%;
-    height: 60%;
-    background: #f8f8f8;
-    border-radius: 4rem;
-    overflow: hidden;
-    transition: all 0.3s linear;
-    display: flex;
+    position : absolute;
+    left     : 50%;
+    top      : 50%;
+    transform: translate(-50%, -50%);
+    @extend .box;
+    background      : #f1f1f1;
+    overflow        : hidden;
+    transition      : all 0.45s linear;
+    display         : flex;
+    // transition   : all .3s linear;
+    // box-shadow   : 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  }
 
-    .form {
-      height: 100%;
-      width: 100%;
-      background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  .social-media {
+    @extend .box;
+    background: $color-accent;
+    position  : absolute;
+    left      : 50%;
+    top       : 50%;
+    transform : translate(-50%, -50%);
+    transition: all 0.35s linear;
+    @include flex-center;
+
+
+    img {
+      height: 50%;
+
+    }
+  }
+
+  .abstarct {
+    @extend .small-box;
+    transition: all 0.5s linear;
+    background: $color-primary;
+    position  : absolute;
+    left      : 50%;
+    top       : 50%;
+    transform : translate(-50%, -50%);
+
+  }
+
+
+  &:hover {
+    .contact-us-card {
+      width     : 100rem;
+      left      : 50%;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13);
     }
 
     .social-media {
-      position: relative;
-      height: 100%;
-      width: 0%;
-      @include flex-center;
-      flex-direction: column;
-      transition: all 0.3s ease-in-out;
+      transform : translate(75%, -40%);
+      width     : 30rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
-      .content {
-        opacity: 0;
-        transition: all 0.3s linear;
-      }
     }
 
-    &:hover {
-      .social-media {
-        .content {
-          opacity: 1;
-        }
-        width: 30%;
-      }
+    .abstarct {
+      transform: translate(184%, -183%);
+
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     }
   }
+
+}
+
+.box {
+  width : 40rem;
+  height: 60rem;
+}
+
+.small-box {
+  width : 20rem;
+  height: 20rem;
 }
