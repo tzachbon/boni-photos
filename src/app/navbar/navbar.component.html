@@ -1,6 +1,10 @@
 <div
   class="nav"
-  [ngClass]="{ close: !navOpen, colorfulBackground: changeBackground }"
+  [ngClass]="{
+    close: !navOpen,
+    colorfulBackground: changeBackground,
+    mobile: mobileService.isHandset$ | async
+  }"
 >
   <div class="toggle" [ngClass]="{ close: !navOpen }" (click)="toggleNav()">
     <mat-icon class="mat-18">arrow_forward_ios</mat-icon>

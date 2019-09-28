@@ -20,7 +20,9 @@
 
     &:disabled {
       box-shadow: none;
-      background: rgba($color-primary, .5);
+      cursor    : inherit;
+      color     : rgba(white, .5);
+       // background: rgba($color-primary, .5);
     }
   }
 }

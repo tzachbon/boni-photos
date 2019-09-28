@@ -1,6 +1,12 @@
-<form class="form" [formGroup]="form" dir="rtl" (ngSubmit)="onSubmit()">
+<form
+  class="form"
+  [formGroup]="form"
+  dir="rtl"
+  (ngSubmit)="onSubmit()"
+  #formRef
+>
   <h1>צרו איתנו קשר ונחזור אליכם ישר</h1>
-  <mat-form-field *ngFor="let control of formControls">
+  <mat-form-field *ngFor="let control of formControls; let j = index">
     <ng-container [ngSwitch]="control">
       <textarea
         *ngSwitchCase="'message'"
@@ -15,10 +21,13 @@
       <input
         *ngSwitchDefault
         matInput
+        [id]="control"
         [type]="getControlType(control)"
         [formControlName]="control"
         [placeholder]="getPlaceHolder(control)"
         required="true"
+        [autocomplete]="getAutoComplete(control)"
+        #inputRef
       />
     </ng-container>
   </mat-form-field>

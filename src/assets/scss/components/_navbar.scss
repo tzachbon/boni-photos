@@ -9,20 +9,39 @@
   align-items    : center;
   background     : rgba(white, .1);
   height         : 8rem;
-  transition     : all .3 linear;
+  transition     : all .3s linear;
 
   &.colorfulBackground {
-    background-image: linear-gradient(135deg, rgba(#667eea, .5) 0%, #764ba2 100%);
+    transition      : all .3s linear;
+    top             : 0;
+    height          : 5rem;
+    width           : 100vw;
+    background-image: linear-gradient(135deg, rgba($color-accent, .5) 0%, rgba($color-primary, .8) 100%);
+
+    &.mobile {
+      top: 4%;
+      height          : auto;
+      background-image: linear-gradient(135deg, rgba($color-primary, 1) 0%, rgba($color-primary, 1) 100%);
+
+      &.close {
+        background-image: linear-gradient(135deg, rgba(#333, .5) 0%, rgba(#333, .5) 100%);
+
+      }
+
+      .toggle {
+        background: transparent;
+      }
+    }
   }
 
   &.close {
-    transition: all .3 linear;
-    width     : auto;
+    transition: all .15s linear;
+    width     : 5rem;
   }
 
   .toggle {
     max-width : 5rem;
-    transition: all .3 linear;
+    transition: all .15s linear;
 
     &.close {
       min-width: 5rem;
@@ -33,8 +52,10 @@
     }
   }
 
+
   .tab,
   .toggle {
+    cursor: pointer;
     @include flex-center;
     transition    : all .3s ease-in-out;
     height        : 100%;
@@ -49,5 +70,48 @@
       background: rgba(white, .4);
     }
 
+  }
+
+  &.mobile {
+    flex-direction: column;
+    min-width     : 5rem;
+    max-width     : 15rem;
+    height        : auto;
+    min-height    : 8rem;
+    transition    : all .15s linear;
+
+    &.close {
+      height    : 8rem;
+      transition: all .15s linear;
+    }
+
+
+
+    .toggle,
+    .tab {
+      min-width : 5rem;
+      max-width : 15rem;
+      min-height: 8rem;
+    }
+
+    .tab {
+      content: ""
+    }
+
+    .toggle {
+      transition: all .15s linear;
+
+      &.close {
+        min-width: 5rem;
+
+        .mat-18 {
+          transform: rotate(180deg)
+        }
+      }
+
+      .mat-icon {
+        transform: rotate(90deg)
+      }
+    }
   }
 }

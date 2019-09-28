@@ -1,5 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatInput } from '@angular/material';
+import { Subscription } from 'rxjs';
+import { FullpageService } from 'src/app/shared/services/fullpage/fullpage.service';
+import { filter, debounceTime } from 'rxjs/operators';
 
 type ContactUsFormControl = 'fullName' | 'message' | 'email' | 'phone';
 
@@ -9,14 +13,47 @@ type ContactUsFormControl = 'fullName' | 'message' | 'email' | 'phone';
   styleUrls: ['./contact-us-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactUsFormComponent implements OnInit {
+export class ContactUsFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitButtonText = `צור איתנו קשר`;
-  constructor() { }
+  @ViewChildren('inputRef') inputRef: QueryList<ElementRef<MatInput>>;
+  subscription = new Subscription()
+  constructor(private cd: ChangeDetectorRef, private fullPageService: FullpageService) { }
 
   ngOnInit() {
+    this.initActiveComponentName();
     this.initForm();
   }
+
+  initActiveComponentName() {
+    const fullPage$ = this.fullPageService.activeComponentName
+      .pipe(filter(cmpName => cmpName.includes('contact-us')), debounceTime(400))
+      .subscribe(componentName => {
+        const input = this.inputRef.find(int => int.nativeElement.id === 'fullName');
+        if (input) {
+          setTimeout(() => {
+            input.nativeElement.focus();
+            input.nativeElement.focused = true;
+          }, 50, input);
+        }
+      });
+
+    this.subscription.add(fullPage$);
+  }
+
+  getAutoComplete(control: ContactUsFormControl) {
+    switch (control) {
+      case 'fullName':
+        return 'cc-name';
+      case 'phone':
+        return 'tel';
+      case 'email':
+        return 'email';
+      default:
+        return 'on';
+    }
+  }
+
 
   initForm() {
     this.form = new FormGroup({
@@ -60,6 +97,10 @@ export class ContactUsFormComponent implements OnInit {
 
   onSubmit() {
 
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
