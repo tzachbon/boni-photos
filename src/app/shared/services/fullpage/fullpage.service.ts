@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
+import { MnFullpageService } from 'ngx-fullpage';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FullpageService {
   private activeComponent = new Subject<string>();
-  constructor() {
+  constructor(private fullpageService: MnFullpageService) {
     this.initActiveComponent();
   }
 
@@ -21,6 +21,13 @@ export class FullpageService {
 
   public get activeComponentName() {
     return this.activeComponent.asObservable();
+  }
+
+  public moveTo(index) {
+    const fullpageWrapper = document.querySelector('.fullpage-wrapper') as HTMLDivElement;
+    const currentPage = fullpageWrapper.childNodes[index].firstChild.firstChild.firstChild as HTMLDivElement;
+    this.fullpageService.moveTo(index + 1);
+    this.activeComponent.next(currentPage.className);
   }
 
 

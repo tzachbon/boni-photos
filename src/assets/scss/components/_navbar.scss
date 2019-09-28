@@ -1,0 +1,53 @@
+.nav {
+  position       : fixed;
+  top            : 4%;
+  right          : 0;
+  z-index        : 50;
+  width          : 80vw;
+  display        : flex;
+  justify-content: space-around;
+  align-items    : center;
+  background     : rgba(white, .1);
+  height         : 8rem;
+  transition     : all .3 linear;
+
+  &.colorfulBackground {
+    background-image: linear-gradient(135deg, rgba(#667eea, .5) 0%, #764ba2 100%);
+  }
+
+  &.close {
+    transition: all .3 linear;
+    width     : auto;
+  }
+
+  .toggle {
+    max-width : 5rem;
+    transition: all .3 linear;
+
+    &.close {
+      min-width: 5rem;
+
+      .mat-18 {
+        transform: rotate(180deg)
+      }
+    }
+  }
+
+  .tab,
+  .toggle {
+    @include flex-center;
+    transition    : all .3s ease-in-out;
+    height        : 100%;
+    width         : 100%;
+    font-size     : 2rem;
+    font-weight   : bold;
+    letter-spacing: .2rem;
+    color         : white;
+
+    &:hover {
+
+      background: rgba(white, .4);
+    }
+
+  }
+}

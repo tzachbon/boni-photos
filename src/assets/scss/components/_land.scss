@@ -82,10 +82,16 @@
 }
 
 @media (max-width: 550px) {
-  .sub-logo {
-    .first,.second {
+  .land-container {
+    background-size: 180% 130%;
 
-      font-size: 5rem;
+    .sub-logo {
+
+      .first,
+      .second {
+
+        font-size: 5rem;
+      }
     }
   }
 }

@@ -1,15 +1,18 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { contactUsAnimations, slide } from 'src/app/shared/animations/animations';
 import { FullpageService } from 'src/app/shared/services/fullpage/fullpage.service';
 import { MobileService } from 'src/app/shared/services/mobile/mobile.service';
-import { contactUsAnimations } from 'src/app/shared/animations/animations';
 
 interface IContactUsButton {
   icon: string;
   title: string;
   text: string;
   url: string;
+  mobileText: string;
 }
+
+const slideRightX = slide('', '-50%,-50%', '.5s', 'slideRightX', '50%,-50%');
 
 @Component({
   selector: 'app-contact-us',
@@ -17,7 +20,10 @@ interface IContactUsButton {
   styleUrls: ['./contact-us.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    contactUsAnimations.abstract, contactUsAnimations.bigCard, contactUsAnimations.socialMedia
+    contactUsAnimations.abstract,
+    contactUsAnimations.bigCard,
+    contactUsAnimations.socialMedia,
+    slideRightX
   ]
 })
 export class ContactUsComponent implements OnInit, OnDestroy {
@@ -42,19 +48,22 @@ export class ContactUsComponent implements OnInit, OnDestroy {
         icon: 'whatsapp',
         title: 'וואטסאפ',
         text: 'אתם מוזמנים לשלוח הודעה עכשיו דרך הוואטסאפ',
-        url: this.whatsAppLink
+        url: this.whatsAppLink,
+        mobileText: 'שלחו הודעה עכשיו!'
       },
       {
         icon: 'email',
         title: 'אימייל',
         text: 'אנחנו תמיד זמינים דרך המייל boniphoto55@gmail.com',
-        url: 'boniphoto55@gmail.com'
+        url: 'boniphoto55@gmail.com',
+        mobileText: 'boniphoto55@gmail.com',
       },
       {
         icon: 'phone',
         title: 'נייד',
         text: 'תמיד תוכלו למצוא אותנו בנייד 0523635250',
-        url: '0523635250'
+        url: '0523635250',
+        mobileText: '0523635250'
       }
     ]
   }

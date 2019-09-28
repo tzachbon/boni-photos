@@ -7,15 +7,34 @@
 
 
   .submit {
-    padding      : 1rem 0;
-    background   : $color-accent;
-    color        : #f3f3f3;
-    transition   : all .3s linear;
-    box-shadow   : 0 10px 20px rgba(0, 0, 0, 0.09), 0 6px 6px rgba(0, 0, 0, 0.13);
+    padding   : 1rem 0;
+    background: $color-accent;
+    color     : #f3f3f3;
+    transition: all .3s linear;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.09), 0 6px 6px rgba(0, 0, 0, 0.13);
+    @include flex-center;
+
+    &>* {
+      margin: 0 .5rem;
+    }
 
     &:disabled {
       box-shadow: none;
       background: rgba($color-primary, .5);
+    }
+  }
+}
+
+
+@media (max-width: 550px) {
+  .form {
+    padding: .5rem 5rem;
+
+    .submit {
+      padding      : 1rem 0;
+      border-radius: 1rem;
+
+
     }
   }
 }

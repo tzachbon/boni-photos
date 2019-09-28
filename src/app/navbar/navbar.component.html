@@ -1,0 +1,17 @@
+<div
+  class="nav"
+  [ngClass]="{ close: !navOpen, colorfulBackground: changeBackground }"
+>
+  <div class="toggle" [ngClass]="{ close: !navOpen }" (click)="toggleNav()">
+    <mat-icon class="mat-18">arrow_forward_ios</mat-icon>
+  </div>
+  <ng-container *ngIf="navOpen">
+    <div
+      class="tab"
+      *ngFor="let section of sections; let i = index"
+      (click)="moveTo(i)"
+    >
+      {{ section.display }}
+    </div>
+  </ng-container>
+</div>

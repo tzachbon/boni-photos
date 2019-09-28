@@ -1,37 +1,55 @@
 <div class="contact-us-container" #section>
   <ng-container>
-    <div class="contact-us-card" [@bigCard]="show">
-      <app-contact-us-form></app-contact-us-form>
-      <div class="contact-us-buttons">
-        <a
-          class="contact-us-button"
-          *ngFor="let cuButton of contactUsButtons"
-          [href]="cuButton.url"
-        >
-          <div class="title">
+    <div
+      class="contact-us-card"
+      [@bigCard]="show && !(mobileService.isHandset$ | async)"
+    >
+      <ng-container>
+        <app-contact-us-form></app-contact-us-form>
+        <div class="contact-us-buttons">
+          <a
+            class="contact-us-button"
+            *ngFor="let cuButton of contactUsButtons"
+            [href]="cuButton.url"
+          >
+            <div class="title">
+              <ng-container
+                *ngIf="cuButton.icon !== 'whatsapp'; else whatsAppRef"
+              >
+                <mat-icon class="mat-18">{{ cuButton.icon }}</mat-icon>
+              </ng-container>
+              <ng-template #whatsAppRef>
+                <img
+                  src="../../../assets/icons/whatsapp.svg"
+                  [alt]="cuButton.title"
+                />
+              </ng-template>
+              <span>{{ cuButton.title }}</span>
+            </div>
             <ng-container
-              *ngIf="cuButton.icon !== 'whatsapp'; else whatsAppRef"
+              *ngIf="!(mobileService.isHandset$ | async); else mobileRef"
             >
-              <mat-icon class="mat-18">{{ cuButton.icon }}</mat-icon>
+              <p>{{ cuButton.text }}</p>
             </ng-container>
-            <ng-template #whatsAppRef>
-              <img
-                src="../../../assets/icons/whatsapp.svg"
-                [alt]="cuButton.title"
-              />
+            <ng-template #mobileRef>
+              <p>{{ cuButton.mobileText }}</p>
             </ng-template>
-            <span>{{ cuButton.title }}</span>
-          </div>
-          <p>{{ cuButton.text }}</p>
-        </a>
-      </div>
+          </a>
+        </div>
+      </ng-container>
     </div>
-    <div class="abstract" [@abstract]="show">
+    <div
+      class="abstract"
+      [@abstract]="show && !(mobileService.isHandset$ | async)"
+    >
       <div class="icon-container">
         <mat-icon class="mat-18">photo_camera</mat-icon>
       </div>
     </div>
-    <div class="social-media" [@socialMedia]="show">
+    <div
+      class="social-media"
+      [@socialMedia]="show && !(mobileService.isHandset$ | async)"
+    >
       <img src="../../../assets/images/contact-us-svg.svg" alt="contact-us" />
     </div>
   </ng-container>

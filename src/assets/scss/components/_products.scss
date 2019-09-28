@@ -53,10 +53,23 @@
 
 @media (max-width: 550px) {
   .products-container {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
     .cards-container {
       flex-wrap      : nowrap;
       overflow-x     : scroll;
+      overflow-y     : auto;
       justify-content: space-between;
+
+      .product__title {
+        span {
+          font-size: 2rem;
+        }
+      }
+
+      .product__data-item {
+        font-size: 1.6rem;
+      }
     }
   }
 }

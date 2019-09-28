@@ -23,6 +23,6 @@
     </ng-container>
   </mat-form-field>
   <button class="submit" [disabled]="form.invalid">
-    {{ submitButtonText }}
+    <span>{{ submitButtonText }}</span> <mat-icon class="mat-18">send</mat-icon>
   </button>
 </form>

@@ -3,7 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 
 export function slide(
-  side: 'X' | 'Y',
+  side: 'X' | 'Y' | '',
   distance = '100vh',
   time = '0.3s',
   name?: string,

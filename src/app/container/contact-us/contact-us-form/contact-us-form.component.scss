@@ -2,3 +2,11 @@
   width : 65%;
   height: 100%;
 }
+
+
+@media (max-width: 550px) {
+  :host {
+    width : auto;
+    height: auto;
+  }
+}

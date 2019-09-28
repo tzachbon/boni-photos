@@ -157,3 +157,50 @@
   width : 20rem;
   height: 20rem;
 }
+
+
+@media (max-width: 550px) {
+  .contact-us-container {
+    .contact-us-card {
+      z-index: 2;
+      width  : 100vw;
+      display: flex;
+
+
+      .contact-us-buttons {
+        width: auto;
+
+
+
+        .contact-us-button {
+          width: calc(100% / 3);
+
+          &:first-child {
+            border-top-left-radius   : 2.5rem;
+            border-bottom-left-radius: 2.5rem;
+          }
+
+          &:last-child {
+            border-top-right-radius   : 2.5rem;
+            border-bottom-right-radius: 2.5rem;
+          }
+
+          .title {
+            font-size: 1.3rem;
+
+          }
+
+          p {
+            word-break: break-all;
+            font-size : 1.2rem;
+
+          }
+
+          img {
+            transform: scale(.7) translate(-15%, -15%);
+          }
+        }
+      }
+    }
+  }
+}
