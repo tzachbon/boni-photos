@@ -4,6 +4,12 @@ import { FullpageService } from 'src/app/shared/services/fullpage/fullpage.servi
 import { MobileService } from 'src/app/shared/services/mobile/mobile.service';
 import { contactUsAnimations } from 'src/app/shared/animations/animations';
 
+interface IContactUsButton {
+  icon: string;
+  title: string;
+  text: string;
+  url: string;
+}
 
 @Component({
   selector: 'app-contact-us',
@@ -18,7 +24,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
   show = false;
   subscription: Subscription = new Subscription();
   @ViewChild('section', { static: true }) section: ElementRef<HTMLDivElement>;
-
+  contactUsButtons: IContactUsButton[] = [];
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -27,7 +33,37 @@ export class ContactUsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initFullPageObservable();
+    this.initContactUsButtons();
+  }
 
+  initContactUsButtons() {
+    this.contactUsButtons = [
+      {
+        icon: 'whatsapp',
+        title: 'וואטסאפ',
+        text: 'אתם מוזמנים לשלוח הודעה עכשיו דרך הוואטסאפ',
+        url: this.whatsAppLink
+      },
+      {
+        icon: 'email',
+        title: 'אימייל',
+        text: 'אנחנו תמיד זמינים דרך המייל boniphoto55@gmail.com',
+        url: 'boniphoto55@gmail.com'
+      },
+      {
+        icon: 'phone',
+        title: 'נייד',
+        text: 'תמיד תוכלו למצוא אותנו בנייד 0523635250',
+        url: '0523635250'
+      }
+    ]
+  }
+
+  get whatsAppLink(): string {
+    const phoneNumber = '972523635250';
+    const text = 'היי הגעתי דרך האתר Boni';
+    const generatedText = text.split(' ').join('%20');
+    return `https://wa.me/${phoneNumber}?text=${generatedText}`;
   }
 
   initFullPageObservable() {

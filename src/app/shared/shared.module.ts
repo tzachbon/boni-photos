@@ -21,6 +21,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   exports: [
     MaterialModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     FeatureBoxComponent,
     ProductCardComponent,
     SocialMediaButtonComponent,

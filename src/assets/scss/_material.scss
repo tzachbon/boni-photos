@@ -2,3 +2,7 @@
   background: transparent;
   color     : #333;
 }
+
+.mat-input-element::placeholder {
+  font-size: 2rem;
+}

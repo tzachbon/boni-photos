@@ -1,0 +1,28 @@
+<form class="form" [formGroup]="form" dir="rtl" (ngSubmit)="onSubmit()">
+  <h1>צרו איתנו קשר ונחזור אליכם ישר</h1>
+  <mat-form-field *ngFor="let control of formControls">
+    <ng-container [ngSwitch]="control">
+      <textarea
+        *ngSwitchCase="'message'"
+        matInput
+        [type]="getControlType(control)"
+        [formControlName]="control"
+        [placeholder]="getPlaceHolder(control)"
+        matTextareaAutosize
+        matAutosizeMinRows="4"
+        required="true"
+      ></textarea>
+      <input
+        *ngSwitchDefault
+        matInput
+        [type]="getControlType(control)"
+        [formControlName]="control"
+        [placeholder]="getPlaceHolder(control)"
+        required="true"
+      />
+    </ng-container>
+  </mat-form-field>
+  <button class="submit" [disabled]="form.invalid">
+    {{ submitButtonText }}
+  </button>
+</form>

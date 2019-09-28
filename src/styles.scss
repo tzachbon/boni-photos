@@ -108,6 +108,7 @@ $boni-theme: mat-light-theme($boni-primary, $boni-accent, $boni-warn);
   box-sizing: inherit;
   outline   : none;
   box-sizing: border-box;
+  font-size : 1.7rem;
 }
 
 html {
@@ -134,6 +135,20 @@ img {
   input {
     font-size: 16px !important;
   }
+
+  input,
+  button {
+    border: none;
+  }
+
+  a,
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: none;
+    color          : inherit;
+    border         : none;
+  }
 }
 
 
@@ -144,4 +159,5 @@ img {
 @import "./assets/scss/components/products";
 @import "./assets/scss/components/card";
 @import "./assets/scss/components/contact-us";
+@import "./assets/scss/components/contact-us-form";
 @import "./assets/scss/components/about-us";

@@ -1,13 +1,30 @@
 <div class="contact-us-container" #section>
   <ng-container>
     <div class="contact-us-card" [@bigCard]="show">
-      <!-- <div class="form"></div>
-          <div class="social-media">
-            <div class="content">
-              <app-social-media-button *ngFor="let socialMediaButton of socialMediaButtons" [socialMedia]="socialMediaButton">
-              </app-social-media-button>
-            </div>
-          </div> -->
+      <app-contact-us-form></app-contact-us-form>
+      <div class="contact-us-buttons">
+        <a
+          class="contact-us-button"
+          *ngFor="let cuButton of contactUsButtons"
+          [href]="cuButton.url"
+        >
+          <div class="title">
+            <ng-container
+              *ngIf="cuButton.icon !== 'whatsapp'; else whatsAppRef"
+            >
+              <mat-icon class="mat-18">{{ cuButton.icon }}</mat-icon>
+            </ng-container>
+            <ng-template #whatsAppRef>
+              <img
+                src="../../../assets/icons/whatsapp.svg"
+                [alt]="cuButton.title"
+              />
+            </ng-template>
+            <span>{{ cuButton.title }}</span>
+          </div>
+          <p>{{ cuButton.text }}</p>
+        </a>
+      </div>
     </div>
     <div class="abstract" [@abstract]="show"></div>
     <div class="social-media" [@socialMedia]="show">
