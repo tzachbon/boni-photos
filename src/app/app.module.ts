@@ -20,7 +20,6 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
     SharedModule,
     MnFullpageModule.forRoot(),

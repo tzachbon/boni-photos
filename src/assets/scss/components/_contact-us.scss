@@ -39,7 +39,7 @@
     }
   }
 
-  .abstarct {
+  .abstract {
     @extend .small-box;
     transition: all 0.5s linear;
     background: $color-primary;
@@ -51,26 +51,26 @@
   }
 
 
-  &:hover {
-    .contact-us-card {
-      width     : 100rem;
-      left      : 50%;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13);
-    }
+  // &:hover {
+  //   .contact-us-card {
+  //     width     : 100rem;
+  //     left      : 50%;
+  //     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13);
+  //   }
 
-    .social-media {
-      transform : translate(75%, -40%);
-      width     : 30rem;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  //   .social-media {
+  //     transform : translate(75%, -40%);
+  //     width     : 30rem;
+  //     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
-    }
+  //   }
 
-    .abstarct {
-      transform: translate(184%, -183%);
+  //   .abstract {
+  //     transform: translate(184%, -183%);
 
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    }
-  }
+  //     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  //   }
+  // }
 
 }
 

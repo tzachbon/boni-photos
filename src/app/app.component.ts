@@ -20,8 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-
-
   // scrollToSection() {
   //   this.handlerSectionSmoothness();
   //   this.currentSection.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth' });

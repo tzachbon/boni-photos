@@ -1,3 +1,40 @@
-<div class="about-us-container">
-
+<div class="about-us-container" dir="rtl" #aboutUsRef>
+  <ng-container>
+    <section
+      class="about-section master-plan"
+      [@slideYUp]="show && !(mobileService.isHandset$ | async)"
+      [@slideXRight]="show && (mobileService.isHandset$ | async)"
+    >
+      <img
+        src="../../../assets/images/about-us/about-us-1.svg"
+        alt="master-plan"
+      />
+      <p>
+        {{ sections[0] }}
+      </p>
+    </section>
+    <section
+      class="about-section photo-shot"
+      [@slideYDown]="show && !(mobileService.isHandset$ | async)"
+      [@slideXLeft]="show && (mobileService.isHandset$ | async)"
+    >
+      <p>
+        {{ sections[1] }}
+      </p>
+      <img
+        src="../../../assets/images/about-us/about-us-2.svg"
+        alt="photo shot"
+      />
+    </section>
+    <section
+      class="about-section success"
+      [@slideYUp]="show && !(mobileService.isHandset$ | async)"
+      [@slideXRight]="show && (mobileService.isHandset$ | async)"
+    >
+      <img src="../../../assets/images/about-us/about-us-3.svg" alt="success" />
+      <p>
+        {{ sections[2] }}
+      </p>
+    </section>
+  </ng-container>
 </div>
