@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { slide } from 'src/app/shared/animations/animations';
 import { MobileService } from '../../shared/services/mobile/mobile.service';
 
-const slideXRight = slide('X', '-10rem', '1s', 'slideXRight');
-const slideXLeft = slide('X', '10rem', '1s', 'slideXLeft');
+const slideXRight = slide('X', '-0rem', '1s', 'slideXRight', '-10rem');
+const slideXLeft = slide('X', '0rem', '1s', 'slideXLeft', '10rem');
 const slideYUp = slide('Y', '-20rem', '1s', 'slideYUp');
 const slideYDown = slide('Y', '20rem', '1s', 'slideYDown');
 

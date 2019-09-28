@@ -2,14 +2,20 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 
 
 
-export function slide(side: 'X' | 'Y', distance = '100vh', time = '0.3s', name?: string) {
+export function slide(
+  side: 'X' | 'Y',
+  distance = '100vh',
+  time = '0.3s',
+  name?: string,
+  distanceBack = '0'
+) {
   return (
     (trigger(name || `slide${side}`, [
       state('true', style({
         transform: `translate${side}(${distance})`
       })),
       state('false', style({
-        transform: `translate${side}(0)`
+        transform: `translate${side}(${distanceBack})`
       })),
       transition('false <=> true', animate(`${time}`))
     ]))
