@@ -20,6 +20,9 @@ app.use('/', async (req, res, next) => {
   next();
 });
 app.use('/', express.static(path.join(__dirname, 'frontend')));
+app.use('/:url', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
 
 app.listen(port);
