@@ -15,17 +15,9 @@ export class ProductsComponent implements OnInit {
   constructor(private sectionsService: SectionService, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
-    this.initSection();
     this.initProducts();
   }
 
-  initSection() {
-    const section: ISection = {
-      name: 'ProductsComponent',
-      elementRef: this.section
-    }
-    this.sectionsService.addSection(section);
-  }
 
   initProducts() {
     this.products = [
@@ -47,7 +39,8 @@ export class ProductsComponent implements OnInit {
           'חבילה עד 2.5 שעות צילום 2050 ₪ ',
           'חבילה עד 3.5 שעות צילום 1350 ₪',
           'חבילה עד 5 שעות צילום 2550 ₪'
-        ]
+        ],
+        isPremium: true
       },
       {
         title: 'צילום וידיאו',

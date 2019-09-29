@@ -17,6 +17,7 @@
         matTextareaAutosize
         matAutosizeMinRows="4"
         required="true"
+        #messageRef
       ></textarea>
       <input
         *ngSwitchDefault
@@ -31,7 +32,7 @@
       />
     </ng-container>
   </mat-form-field>
-  <button class="submit" [disabled]="form.invalid">
+  <button class="submit" [disabled]="isFormValid">
     <span>{{ submitButtonText }}</span> <mat-icon class="mat-18">send</mat-icon>
   </button>
 </form>

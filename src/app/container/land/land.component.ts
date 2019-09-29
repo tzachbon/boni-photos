@@ -20,16 +20,9 @@ export class LandComponent implements OnInit {
 
 
   ngOnInit() {
-    this.initSection();
 
   }
 
-  initSection() {
-    const section: ISection = {
-      name: 'LandComponent',
-      elementRef: this.section
-    }
-    this.sectionsService.addSection(section);
-  }
+
 
 }

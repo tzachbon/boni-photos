@@ -6,8 +6,8 @@ import { MobileService } from '../../shared/services/mobile/mobile.service';
 
 const slideXRight = slide('X', '-0rem', '1s', 'slideXRight', '-10rem');
 const slideXLeft = slide('X', '0rem', '1s', 'slideXLeft', '10rem');
-const slideYUp = slide('Y', '-20rem', '1s', 'slideYUp');
-const slideYDown = slide('Y', '20rem', '1s', 'slideYDown');
+const slideYUp = slide('Y', '-17rem', '1s', 'slideYUp');
+const slideYDown = slide('Y', '22rem', '1s', 'slideYDown');
 
 @Component({
   selector: 'app-about-us',

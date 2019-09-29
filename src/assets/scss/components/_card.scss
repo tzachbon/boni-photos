@@ -1,16 +1,43 @@
 .product {
   margin   : 2rem;
-  height   : 50rem;
+  height   : 45rem;
   width    : 40rem;
   max-width: 90vw;
   overflow : hidden;
+  position : relative;
+
+  &.premium {
+    transform: scale(1.15);
+
+    &:hover {
+      transform: scale(1.2) translateY(-1rem);
+
+    }
+  }
+
 
   &.mat-card {
-    box-shadow   : 0 2rem 2rem 0 rgba(#333, 20%);
-    transition   : all .3s linear;
-    padding      : 0;
-    margin       : 0;
-    border-radius: 2rem;
+    box-shadow: 0 2rem 2rem 0 rgba(#333, 20%);
+    transition: all .3s linear;
+    padding   : 0;
+    margin    : 0;
+
+    .product-button {
+      position: absolute;
+      bottom  : 2%;
+      width   : 100%;
+      padding : 1rem;
+
+      .mat-raised-button {
+        background: $color-accent;
+        color     : white;
+        width     : inherit;
+
+        .mat-18 {
+          margin: .5rem;
+        }
+      }
+    }
 
 
     &:hover {
@@ -22,31 +49,32 @@
   &__title {
     width    : 100%;
     height   : 10%;
-    font-size: 2.4rem;
+    font-size: 2.3rem;
     @include flex-center;
     border-bottom: 2px solid #eee;
 
-    span {
+    .title {
       text-align: center;
-      margin    : auto;
+      font-size : inherit;
+    }
+
+    .premium {
+      margin: 1rem;
     }
   }
 
   &__data {
-    width          : 100%;
+    @include flex-center;
     height         : 50%;
-    padding        : 1rem;
     display        : flex;
     flex-direction : column;
-    align-items    : center;
     justify-content: flex-start;
     direction      : rtl;
     font-size      : 2rem;
 
     &-item {
-      margin         : .5rem 0;
-      text-align     : right;
-      list-style-type: none;
+      margin    : .5rem 0;
+      text-align: right;
     }
   }
 

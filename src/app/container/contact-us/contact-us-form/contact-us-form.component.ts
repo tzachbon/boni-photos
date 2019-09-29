@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { FullpageService } from 'src/app/shared/services/fullpage/fullpage.service';
 import { filter, debounceTime } from 'rxjs/operators';
+import { SectionService } from 'src/app/shared/services/section.service';
+import { IProduct } from 'src/app/shared/models/product.interface';
 
 type ContactUsFormControl = 'fullName' | 'message' | 'email' | 'phone';
 
@@ -16,11 +18,18 @@ type ContactUsFormControl = 'fullName' | 'message' | 'email' | 'phone';
 export class ContactUsFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitButtonText = `צור איתנו קשר`;
+  @ViewChild('formRef', { static: true }) formRef: ElementRef<HTMLFormElement>;
   @ViewChildren('inputRef') inputRef: QueryList<ElementRef<MatInput>>;
-  subscription = new Subscription()
-  constructor(private cd: ChangeDetectorRef, private fullPageService: FullpageService) { }
+  subscription = new Subscription();
+  @ViewChild('messageRef', { static: false }) messageRef: ElementRef<MatInput>;
+  constructor(
+    private cd: ChangeDetectorRef,
+    private fullPageService: FullpageService,
+    private sectionService: SectionService,
+  ) { }
 
   ngOnInit() {
+    this.initProductChosenObservable();
     this.initActiveComponentName();
     this.initForm();
   }
@@ -34,11 +43,33 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             input.nativeElement.focus();
             input.nativeElement.focused = true;
-          }, 50, input);
+          }, 100, input);
         }
+
       });
 
     this.subscription.add(fullPage$);
+  }
+
+  get isFormValid() {
+    return this.form ? this.form.invalid : false;
+  }
+
+  initProductChosenObservable() {
+    const product$ = this.sectionService.chosenProduct$
+      .pipe(filter(prd => !!prd))
+      .subscribe(product => {
+        this.fullPageService.moveTo(3);
+        if (this.messageRef) {
+          this.messageRef.nativeElement.value = this.getProductMessage(product);
+          this.cd.detectChanges();
+        }
+      });
+    this.subscription.add(product$);
+  }
+
+  getProductMessage(product: IProduct) {
+    return `היי רציתי לשאול לגבי ${product.title}`;
   }
 
   getAutoComplete(control: ContactUsFormControl) {

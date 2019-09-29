@@ -16,10 +16,10 @@
     top             : 0;
     height          : 5rem;
     width           : 100vw;
-    background-image: linear-gradient(135deg, rgba($color-accent, .5) 0%, rgba($color-primary, .8) 100%);
+    background-image: linear-gradient(135deg, rgba(#000, .4) 0%, rgba(#000, .4) 100%);
 
     &.mobile {
-      top: 4%;
+      top             : 4%;
       height          : auto;
       background-image: linear-gradient(135deg, rgba($color-primary, 1) 0%, rgba($color-primary, 1) 100%);
 

@@ -5,11 +5,12 @@
       [@bigCard]="show && !(mobileService.isHandset$ | async)"
     >
       <ng-container>
-        <app-contact-us-form ></app-contact-us-form>
+        <app-contact-us-form></app-contact-us-form>
         <div class="contact-us-buttons">
           <a
             class="contact-us-button"
             *ngFor="let cuButton of contactUsButtons"
+            [id]="cuButton.icon"
             [href]="cuButton.url"
           >
             <div class="title">

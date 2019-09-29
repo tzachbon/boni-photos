@@ -38,15 +38,40 @@
 
 
       .contact-us-button {
+        transition: all .3s ease-in-out;
+
+        &#whatsapp {
+          border-top: .5rem solid green;
+
+          &:hover {
+            transform: translateY(-1rem);
+          }
+        }
+
+        &#email {
+          border-bottom: .5rem solid $color-primary;
+
+          &:hover {
+            transform: translateY(-1rem);
+          }
+        }
+
+        &#phone {
+          border-top: .5rem solid $color-accent;
+
+          &:hover {
+            transform: translateY(-1rem);
+          }
+        }
 
         &:nth-child(odd) {
-          background: $color-accent;
+          background: rgb(218, 218, 218);
           color     : darken($color-primary, 10);
         }
 
         &:nth-child(even) {
-          background: $color-primary;
-          color     : lighten($color-accent, 10);
+          background: rgb(231, 231, 231);
+          color     : darken($color-primary, 10);
         }
 
         @include flex-center;
@@ -175,15 +200,15 @@
         .contact-us-button {
           width: calc(100% / 3);
 
-          &:first-child {
-            border-top-left-radius   : 2.5rem;
-            border-bottom-left-radius: 2.5rem;
-          }
+          // &:first-child {
+          //   border-top-left-radius   : 2.5rem;
+          //   border-bottom-left-radius: 2.5rem;
+          // }
 
-          &:last-child {
-            border-top-right-radius   : 2.5rem;
-            border-bottom-right-radius: 2.5rem;
-          }
+          // &:last-child {
+          //   border-top-right-radius   : 2.5rem;
+          //   border-bottom-right-radius: 2.5rem;
+          // }
 
           .title {
             font-size: 1.3rem;
