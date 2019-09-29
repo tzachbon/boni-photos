@@ -1,1 +1,1 @@
-{"version":3,"file":"response.interface.js","sourceRoot":"","sources":["../../models/response.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IResponse<T> {\n  isValid: boolean;\n  body: T;\n}\n\n\n\n"]}
+{"version":3,"file":"response.interface.js","sourceRoot":"","sources":["../../src/models/response.interface.ts"],"names":[],"mappings":"","sourcesContent":["export interface IResponse<T> {\n  isValid: boolean;\n  body: T;\n}\n\n\n\n"]}

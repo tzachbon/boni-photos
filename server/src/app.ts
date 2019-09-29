@@ -10,6 +10,7 @@ const counter = new Counter();
 const app: express.Application = express();
 const port = process.env.PORT || 3088;
 
+app.use('', express.static(path.join(__dirname, 'frontend')));
 app.use(json({ limit: '500mb' }));
 app.use(urlencoded({ limit: '500mb', extended: true }));
 app.use(headersController);
@@ -19,10 +20,12 @@ app.use('/', async (req, res, next) => {
   counter.updateCounter();
   next();
 });
-app.use('/', express.static(path.join(__dirname, 'frontend')));
-app.use('/:url', (req, res, next) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
-});
+
+app.use('*',
+  (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  }
+);
 
 
 app.listen(port);

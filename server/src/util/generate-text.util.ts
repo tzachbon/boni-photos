@@ -1,4 +1,4 @@
-import { IMessage } from '../../models/message.interface';
+import { IMessage } from '../models/message.interface';
 export const generateText = (userData: IMessage) => {
   const stringDate = new Date().toString();
   return `

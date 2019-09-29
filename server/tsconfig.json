@@ -4,7 +4,7 @@
     "module": "commonjs",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "removeComments": false,
+    "removeComments": true,
     "noImplicitAny": false,
     "baseUrl": ".",
     "outDir": "dist",
@@ -16,7 +16,6 @@
     "types": ["node"],
     "lib": ["es2017", "dom"],
     "allowSyntheticDefaultImports": true
-
   },
   "include": ["src/**/*"],
   "exclude": ["typings/browser.d.ts", "typings/browser", "node_modules"]

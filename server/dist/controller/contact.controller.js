@@ -36,9 +36,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var response_util_1 = require("../util/response.util");
+var mail_util_1 = require("../util/mail.util");
+var generate_text_util_1 = require("../util/generate-text.util");
 exports.ContactController = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var userData, subject, text, mailToAdmin, mailDetails, error_1;
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                userData = req.body;
+                subject = "\u05D9\u05D5\u05D6\u05E8 \u05D7\u05D3\u05E9 \u05E9\u05DC\u05D7 \u05E2\u05DB\u05E9\u05D9\u05D5 \u05DE\u05D9\u05D9\u05DC \u05D3\u05E8\u05DA \u05D4\u05D0\u05EA\u05E8!";
+                text = generate_text_util_1.generateText(userData);
+                mailToAdmin = new mail_util_1.Mailer(subject, text);
+                console.log('====================================');
+                console.log(mailToAdmin.mailInfo);
+                console.log('====================================');
+                return [4, mailToAdmin.send()];
+            case 1:
+                mailDetails = _a.sent();
+                res.status(201).json(response_util_1.responseHelper({
+                    message: 'Message Sent',
+                    mailDetails: mailDetails
+                }));
+                return [3, 3];
+            case 2:
+                error_1 = _a.sent();
+                res.status(500).json(response_util_1.responseHelper({
+                    error: error_1
+                }, false));
+                return [3, 3];
+            case 3: return [2];
+        }
     });
 }); };
 //# sourceMappingURL=contact.controller.js.map

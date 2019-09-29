@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
 import { responseHelper } from '../util/response.util';
 import { Mailer } from '../util/mail.util';
-import { IMessage } from '../../models/message.interface';
+import { IMessage } from '../models/message.interface';
 import { generateText } from '../util/generate-text.util';
 
 export const ContactController: RequestHandler = async (req, res, next) => {

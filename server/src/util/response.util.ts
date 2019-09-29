@@ -1,5 +1,5 @@
 
-import { IResponse } from '../../models/response.interface';
+import { IResponse } from '../models/response.interface';
 
 export const responseHelper = <T>(body: T, isValid = true): IResponse<T> => {
   if (!isValid) {
