@@ -1,0 +1,231 @@
+.contact-us-container {
+  height    : 100vh;
+  width     : 100%;
+  background: #fff;
+  position  : relative;
+
+  background-repeat: no-repeat;
+  @include flex-center;
+  transition: all 0.3s linear;
+
+  .contact-us-card {
+    position : absolute;
+    left     : 50%;
+    top      : 50%;
+    transform: translate(-50%, -50%);
+    @extend .box;
+    background    : #f1f1f1;
+    overflow      : hidden;
+    transition    : all 0.45s linear;
+    display       : flex;
+    flex-direction: column;
+    text-align    : center;
+    padding       : 1rem 0;
+    box-shadow    : 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+    h1 {
+      font-size: 3rem;
+      color    : $color-primary;
+    }
+
+    .contact-us-buttons {
+      flex      : 1;
+      display   : flex;
+      width     : 65%;
+      min-height: 13.5rem;
+      padding   : 2rem;
+      cursor    : pointer;
+
+
+      .contact-us-button {
+        transition: all .3s ease-in-out;
+
+        &#whatsapp {
+          border-top: .5rem solid green;
+
+          &:hover {
+            transform: translateY(-1rem);
+          }
+        }
+
+        &#email {
+          border-bottom: .5rem solid $color-primary;
+
+          &:hover {
+            transform: translateY(-1rem);
+          }
+        }
+
+        &#phone {
+          border-top: .5rem solid $color-accent;
+
+          &:hover {
+            transform: translateY(-1rem);
+          }
+        }
+
+        &:nth-child(odd) {
+          background: rgb(218, 218, 218);
+          color     : darken($color-primary, 10);
+        }
+
+        &:nth-child(even) {
+          background: rgb(231, 231, 231);
+          color     : darken($color-primary, 10);
+        }
+
+        @include flex-center;
+        justify-content: space-between;
+        flex-direction : column;
+        flex           : 1;
+        padding        : 1rem;
+
+        .title {
+          width          : 100%;
+          display        : flex;
+          justify-content: space-between;
+          align-items    : center;
+
+        }
+
+        p {
+          text-align: right;
+          font-size : 1.3rem;
+        }
+      }
+    }
+
+  }
+
+  .social-media {
+    @extend .box;
+    background: $color-accent;
+    position  : absolute;
+    left      : 50%;
+    top       : 50%;
+    transform : translate(-50%, -50%);
+    transition: all 0.35s linear;
+    @include flex-center;
+
+
+
+
+    img {
+      height: 50%;
+
+    }
+  }
+
+  .abstract {
+    @extend .small-box;
+    transition: all 0.5s linear;
+    background: $color-primary;
+    position  : absolute;
+    left      : 50%;
+    top       : 50%;
+    transform : translate(-50%, -50%);
+    @include flex-center;
+    width : 100%;
+    height: 100%;
+
+    .icon-container {
+      position: relative;
+      @include flex-center;
+      width : 100%;
+      height: 100%;
+
+      .mat-18 {
+        @include abs-center;
+        transform     : translate(-50%, -25%);
+        width         : 100%;
+        height        : 100%;
+        text-align    : center;
+        vertical-align: middle;
+        margin        : auto;
+        width         : 100%;
+        color         : #eee;
+        font-size     : 8rem;
+      }
+    }
+
+  }
+
+
+  // &:hover {
+  //   .contact-us-card {
+  //     width     : 100rem;
+  //     left      : 50%;
+  //     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13);
+  //   }
+
+  //   .social-media {
+  //     transform : translate(75%, -40%);
+  //     width     : 30rem;
+
+  //   }
+
+  //   .abstract {
+  //     transform: translate(184%, -183%);
+
+  //     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  //   }
+  // }
+
+}
+
+.box {
+  width : 40rem;
+  height: 60rem;
+}
+
+.small-box {
+  width : 20rem;
+  height: 20rem;
+}
+
+
+@media (max-width: 550px) {
+  .contact-us-container {
+    .contact-us-card {
+      z-index: 2;
+      width  : 100vw;
+      display: flex;
+
+
+      .contact-us-buttons {
+        width: auto;
+
+
+
+        .contact-us-button {
+          width: calc(100% / 3);
+
+          // &:first-child {
+          //   border-top-left-radius   : 2.5rem;
+          //   border-bottom-left-radius: 2.5rem;
+          // }
+
+          // &:last-child {
+          //   border-top-right-radius   : 2.5rem;
+          //   border-bottom-right-radius: 2.5rem;
+          // }
+
+          .title {
+            font-size: 1.3rem;
+
+          }
+
+          p {
+            word-break: break-all;
+            font-size : 1.2rem;
+
+          }
+
+          img {
+            transform: scale(.7) translate(-15%, -15%);
+          }
+        }
+      }
+    }
+  }
+}

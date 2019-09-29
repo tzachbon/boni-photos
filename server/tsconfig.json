@@ -14,7 +14,9 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "types": ["node"],
-    "lib": ["es2017", "dom"]
+    "lib": ["es2017", "dom"],
+    "allowSyntheticDefaultImports": true
+
   },
   "include": ["src/**/*"],
   "exclude": ["typings/browser.d.ts", "typings/browser", "node_modules"]

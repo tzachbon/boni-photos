@@ -11,7 +11,7 @@ import { ServerInterceptor } from './shared/services/http/server.interceptor';
 import { ProductsModule } from './container/products/products.module';
 import { NavbarModule } from './navbar/navbar.module';
 import { SharedModule } from './shared/shared.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +23,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: true }),
     SharedModule,
     MnFullpageModule.forRoot(),
+    HttpClientModule,
 
     // Container Modules
     LandModule,
@@ -40,4 +41,4 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { } 
+export class AppModule { }

@@ -6,6 +6,7 @@ import { FullpageService } from 'src/app/shared/services/fullpage/fullpage.servi
 import { filter, debounceTime } from 'rxjs/operators';
 import { SectionService } from 'src/app/shared/services/section.service';
 import { IProduct } from 'src/app/shared/models/product.interface';
+import { HttpService } from '../../../shared/services/http/http.service';
 
 type ContactUsFormControl = 'fullName' | 'message' | 'email' | 'phone';
 
@@ -26,6 +27,7 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private fullPageService: FullpageService,
     private sectionService: SectionService,
+    private httpService: HttpService,
   ) { }
 
   ngOnInit() {
@@ -67,6 +69,7 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
           } else {
             this.messageRef.nativeElement.value = this.getProductMessage(product);
           }
+          this.form.updateValueAndValidity();
           this.cd.detectChanges();
         }
       });
@@ -132,7 +135,19 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    if (!this.form || this.form.invalid) {
+      console.log('====================================');
+      console.log('this form is not valid');
+      console.log('====================================');
+      return;
+    }
 
+    this.httpService.sendContactMessage(this.form.value)
+      .subscribe(res => {
+        console.log('====================================');
+        console.log(res);
+        console.log('====================================');
+      });
   }
 
   ngOnDestroy() {
