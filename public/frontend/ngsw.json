@@ -1,0 +1,132 @@
+{
+  "configVersion": 1,
+  "timestamp": 1569767768291,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main-es2015.931dc13c81aefa284909.js",
+        "/main-es5.b519f9b1751e68847b62.js",
+        "/manifest.webmanifest",
+        "/polyfills-es2015.5728f680576ca47e99fe.js",
+        "/polyfills-es5.4e06eb653a3c8a2d581f.js",
+        "/runtime-es2015.858f8dd898b75fe86926.js",
+        "/runtime-es5.741402d1d47331ce975c.js",
+        "/scripts.1b526135724dd08d8c61.js",
+        "/styles.05985023405e070bf49b.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/icons/premium.svg",
+        "/assets/icons/whatsapp.svg",
+        "/assets/images/about-us/about-us-1.svg",
+        "/assets/images/about-us/about-us-2.svg",
+        "/assets/images/about-us/about-us-3.svg",
+        "/assets/images/contact-us-svg.svg",
+        "/assets/images/contact-us.jpeg",
+        "/assets/images/contact-us.jpg",
+        "/assets/images/land.jpeg",
+        "/assets/images/land_backup.jpg",
+        "/assets/images/magnet.jpg",
+        "/assets/images/products.jpg",
+        "/assets/scss/_animation.scss",
+        "/assets/scss/_import.scss",
+        "/assets/scss/_material.scss",
+        "/assets/scss/_mixin.scss",
+        "/assets/scss/_variables.scss",
+        "/assets/scss/components/_about-us.scss",
+        "/assets/scss/components/_card.scss",
+        "/assets/scss/components/_contact-us-form.scss",
+        "/assets/scss/components/_contact-us.scss",
+        "/assets/scss/components/_feature-box.scss",
+        "/assets/scss/components/_land.scss",
+        "/assets/scss/components/_navbar.scss",
+        "/assets/scss/components/_products.scss"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/icons/premium.svg": "3e591a7de6ba517afe8d55af103cb92a25fc2fee",
+    "/assets/icons/whatsapp.svg": "8351c80748aa05092e88e868bc4542387a971a92",
+    "/assets/images/about-us/about-us-1.svg": "f71b7700ae07c4253c43d17a3500ba6a05b15121",
+    "/assets/images/about-us/about-us-2.svg": "3b100a3fb7212adbfdc6ed7275a6ac5489896247",
+    "/assets/images/about-us/about-us-3.svg": "5a1a055b9a332d5da8a495fa433b84a19184a0d7",
+    "/assets/images/contact-us-svg.svg": "552f4951bff5c4666cf4414537e0b434915d3a3d",
+    "/assets/images/contact-us.jpeg": "d642a449cd36f021c4d2b04e5cd762182a03deab",
+    "/assets/images/contact-us.jpg": "e82db0501c21d042d2c3e829484509bc178506d7",
+    "/assets/images/land.jpeg": "fd0e44b80527b6bd6439a5bdd017d74fd686051d",
+    "/assets/images/land_backup.jpg": "f53c4cbe81624c38aeab6189d3eac5a1b15fa479",
+    "/assets/images/magnet.jpg": "023abeb2392f7255752d4ba5c2eb5225fbd3ffca",
+    "/assets/images/products.jpg": "1decc1e5278251be785f30cae3f2c6d9970e48e9",
+    "/assets/scss/_animation.scss": "e254c8b7a2a40c3108bbd0e1e33e12bfa572e8cd",
+    "/assets/scss/_import.scss": "bdc29d3144334a246e36cba1797ab9835fd941a0",
+    "/assets/scss/_material.scss": "bef0d93ca7f29720c37df101ac1361e638898ceb",
+    "/assets/scss/_mixin.scss": "8c4b5ef47ef7e785d19c0234a59750b3f39745ab",
+    "/assets/scss/_variables.scss": "6445047c792396afd8ca16859cf682d9c6012e13",
+    "/assets/scss/components/_about-us.scss": "2fa2298e38ab7350d16d326ff015184ce33085b7",
+    "/assets/scss/components/_card.scss": "a05e74ea90d719fed6a47d4fde5e056dcec84adf",
+    "/assets/scss/components/_contact-us-form.scss": "327cce0b510638fd250dedb377466733b7ded9f2",
+    "/assets/scss/components/_contact-us.scss": "fff61ebcbddbc9fc2383dc6376f52d185f459962",
+    "/assets/scss/components/_feature-box.scss": "636945da02ef7337f16af384a787eb5680077003",
+    "/assets/scss/components/_land.scss": "7afdfb9dfb692f8bc4c4361528f8c7a65e76a540",
+    "/assets/scss/components/_navbar.scss": "475a5de689412d477b0ee53b86e6172423ad80a4",
+    "/assets/scss/components/_products.scss": "bc593536b0f5642c0cc9f3f3402e41907467fe48",
+    "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/index.html": "50088578259999f378783d18f35fe51a2ff020ad",
+    "/main-es2015.931dc13c81aefa284909.js": "b721b1c7a7980aa247afe8f88d0b248e3075dafc",
+    "/main-es5.b519f9b1751e68847b62.js": "202928ee0abe643d4806eb96dd3f15546a926459",
+    "/manifest.webmanifest": "1c9404492d0ce88b2d2835f8894c3442495c4f05",
+    "/polyfills-es2015.5728f680576ca47e99fe.js": "77f974dd2b186031cfc4f4526d96db4efcd39353",
+    "/polyfills-es5.4e06eb653a3c8a2d581f.js": "f84a71ef6c7a788b5fe701bf2405313d7766a66d",
+    "/runtime-es2015.858f8dd898b75fe86926.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/runtime-es5.741402d1d47331ce975c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/scripts.1b526135724dd08d8c61.js": "c6ae404046d62bffcd1523a4b325964c738d7b58",
+    "/styles.05985023405e070bf49b.css": "1956de9d8bdcb051110838c315d5cff1769b0288"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
