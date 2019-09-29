@@ -61,7 +61,12 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
       .subscribe(product => {
         this.fullPageService.moveTo(3);
         if (this.messageRef) {
-          this.messageRef.nativeElement.value = this.getProductMessage(product);
+          const value = this.messageRef.nativeElement.value;
+          if (value.length) {
+            this.messageRef.nativeElement.value += ' ' + this.getProductMessage(product);
+          } else {
+            this.messageRef.nativeElement.value = this.getProductMessage(product);
+          }
           this.cd.detectChanges();
         }
       });
