@@ -22,6 +22,27 @@ export function slide(
   );
 }
 
+export function slideTo(
+  side: 'X' | 'Y' | '',
+  distance = '100vh',
+  time = '0.3s',
+  name?: string,
+  distanceBack = '0'
+) {
+  return (
+    trigger(name || `slide${side}`, [
+      state('void', style({
+        transform: `translate${side}(${distance})`
+      })),
+      state('*', style({
+        transform: `translate${side}(${distanceBack})`
+      })),
+      transition(':enter', animate(`${time} ease-in`)),
+      transition('* => void', animate(`${time} ease-out`))
+    ])
+  )
+}
+
 
 
 const bigCard =

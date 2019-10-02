@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 export class FullpageService {
   private activeComponent = new Subject<string>();
   constructor(private fullpageService: MnFullpageService) {
-    this.initActiveComponent();
+    // this.initActiveComponent();
   }
 
   private initActiveComponent() {

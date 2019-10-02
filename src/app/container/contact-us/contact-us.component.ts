@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { contactUsAnimations, slide } from 'src/app/shared/animations/animations';
-import { FullpageService } from 'src/app/shared/services/fullpage/fullpage.service';
 import { MobileService } from 'src/app/shared/services/mobile/mobile.service';
+import { RoutesService } from '../../shared/services/routes.service';
 
 interface IContactUsButton {
   icon: string;
@@ -34,7 +35,7 @@ export class ContactUsComponent implements OnInit, OnDestroy {
 
   constructor(
     private cd: ChangeDetectorRef,
-    private fullPageService: FullpageService,
+    private routesService: RoutesService,
     public mobileService: MobileService) { }
 
   ngOnInit() {
@@ -76,13 +77,19 @@ export class ContactUsComponent implements OnInit, OnDestroy {
   }
 
   initFullPageObservable() {
-    const fullPage$ = this.fullPageService.activeComponentName
-      .subscribe(componentName => {
-        const isOnViewPort = componentName === this.section.nativeElement.className;
-        if (this.show !== isOnViewPort) {
-          this.show = isOnViewPort;
-          this.cd.detectChanges();
-        }
+    const routes = this.routesService.routesNames;
+    const last = routes[routes.length - 1];
+    const currentUrlPath = location.pathname.replace('/', '');
+    this.show = currentUrlPath === last;
+    this.cd.detectChanges();
+
+    const fullPage$ = this.routesService.currentRoute$
+      .pipe(map(currentRoute => {
+        return last === currentRoute;
+      }))
+      .subscribe(isLast => {
+        this.show = isLast;
+        this.cd.detectChanges();
       });
     this.subscription.add(fullPage$);
   }

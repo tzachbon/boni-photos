@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FullpageService } from '../shared/services/fullpage/fullpage.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
 import { MobileService } from '../shared/services/mobile/mobile.service';
+import { RoutesService } from '../shared/services/routes.service';
+import { UtilService } from '../shared/services/util/util.service';
+import { map } from 'rxjs/operators';
 
 interface Section {
   name: string;
@@ -17,37 +18,36 @@ interface Section {
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   sections: Section[] = [
-    {
-      name: 'land',
-      display: 'Top'
-    },
-    {
-      name: 'about-us',
-      display: 'About Us'
-    },
-    {
-      name: 'products',
-      display: 'Products',
-    },
-    {
-      name: 'contact-us',
-      display: 'Contact Us'
-    },
   ];
   navOpen: boolean;
   changeBackground = false;
   subscription = new Subscription();
 
   constructor(
-    private fullpageService: FullpageService,
     private cd: ChangeDetectorRef,
+    private utilService: UtilService,
+    private routesService: RoutesService,
     public mobileService: MobileService
   ) { }
 
   ngOnInit() {
+    this.initCurrentRouteObservable();
+    this.initSections();
     this.initNavOpen();
-    this.initCurrentSectionObservable();
   }
+
+  initCurrentRouteObservable() {
+    const firstRouteName = this.routesService.routesNames[0];
+    const route$ = this.routesService.currentRoute$
+      .asObservable()
+      .pipe(map(routeName => routeName !== firstRouteName))
+      .subscribe(isNotFirst => {
+        this.changeBackground = isNotFirst;
+        this.cd.detectChanges();
+      });
+    this.subscription.add(route$);
+  }
+
 
   initNavOpen() {
     setTimeout(() => {
@@ -56,26 +56,24 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  initCurrentSectionObservable() {
-    const fullPage$ = this.fullpageService.activeComponentName
-      .pipe(
-        map((componentName: string) => !componentName.includes('land')),
-        filter(changeBackground => changeBackground !== this.changeBackground)
-      )
-      .subscribe(changeBackground => {
-        this.changeBackground = changeBackground;
-        this.cd.detectChanges();
-      });
-    this.subscription.add(fullPage$);
-  }
+
 
   moveTo(index: number) {
-    this.fullpageService.moveTo(index);
-    const isMobile = window.screen.width <= 550;
-    if (isMobile) {
-      this.toggleNav();
-      this.cd.detectChanges();
-    }
+    const route = this.sections[index];
+    const path = this.routesService.getRoutePathByName(route.name);
+    this.routesService.navigateTo(path);
+  }
+
+  initSections() {
+    this.sections = this.routesService.routesNames.map(routeName => {
+      const display = this.utilService.titlecaseString(routeName);
+      const section: Section = {
+        name: routeName,
+        display
+      };
+      return section;
+    });
+    this.cd.detectChanges();
   }
 
   toggleNav() {

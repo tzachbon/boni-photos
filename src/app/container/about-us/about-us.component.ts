@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FullpageService } from '../../shared/services/fullpage/fullpage.service';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { slide } from 'src/app/shared/animations/animations';
+import { map } from 'rxjs/operators';
 import { MobileService } from '../../shared/services/mobile/mobile.service';
+import { RoutesService } from '../../shared/services/routes.service';
+import { slideTo } from 'src/app/shared/animations/animations';
 
-const slideXRight = slide('X', '-0rem', '1s', 'slideXRight', '-10rem');
-const slideXLeft = slide('X', '0rem', '1s', 'slideXLeft', '10rem');
-const slideYUp = slide('Y', '-17rem', '1s', 'slideYUp');
-const slideYDown = slide('Y', '22rem', '1s', 'slideYDown');
+const slideXRight = slideTo('X', '-0rem', '1s', 'slideXRight', '-10rem');
+const slideXLeft = slideTo('X', '0rem', '1s', 'slideXLeft', '10rem');
+const slideYUp = slideTo('Y', '-17rem', '1s', 'slideYUp');
+const slideYDown = slideTo('Y', '22rem', '1s', 'slideYDown');
 
 @Component({
   selector: 'app-about-us',
@@ -24,7 +25,7 @@ export class AboutUsComponent implements OnInit, OnDestroy {
 
   constructor(
     private cd: ChangeDetectorRef,
-    private fullPageService: FullpageService,
+    private routesService: RoutesService,
     public mobileService: MobileService
   ) {
   }
@@ -32,6 +33,9 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initFullPageObservable();
     this.initSections();
+    console.log('====================================');
+    console.log(this.show);
+    console.log('====================================');
   }
 
   initSections() {
@@ -44,13 +48,19 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   }
 
   initFullPageObservable() {
-    const fullPage$ = this.fullPageService.activeComponentName
-      .subscribe(componentName => {
-        const isOnViewPort = componentName === this.aboutUsRef.nativeElement.className;
-        if (this.show !== isOnViewPort) {
-          this.show = isOnViewPort;
-          this.cd.detectChanges();
-        }
+    const routes = this.routesService.routesNames;
+    const componentRoute = routes.find(route => route === 'about-us');
+    const currentUrlPath = location.pathname.replace('/', '');
+    this.show = currentUrlPath === componentRoute;
+    this.cd.detectChanges();
+
+    const fullPage$ = this.routesService.currentRoute$
+      .pipe(map(currentRoute => {
+        return componentRoute === currentRoute;
+      }))
+      .subscribe(isLast => {
+        this.show = isLast;
+        this.cd.detectChanges();
       });
     this.subscription.add(fullPage$);
   }
