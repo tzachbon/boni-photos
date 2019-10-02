@@ -63,12 +63,14 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
       .subscribe(product => {
         this.fullPageService.moveTo(3);
         if (this.messageRef) {
-          const value = this.messageRef.nativeElement.value;
+          let value = this.messageRef.nativeElement.value;
           if (value.length) {
-            this.messageRef.nativeElement.value += ' ' + this.getProductMessage(product);
+            value = this.messageRef.nativeElement.value + ' ' + this.getProductMessage(product);
           } else {
-            this.messageRef.nativeElement.value = this.getProductMessage(product);
+            value = this.getProductMessage(product);
           }
+
+          this.form.get('message').setValue(value);
           this.form.updateValueAndValidity();
           this.cd.detectChanges();
         }
@@ -136,6 +138,7 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (!this.form || this.form.invalid) {
+      alert('הטופס לא תקין, אנא בדוק את הערכים')
       console.log('====================================');
       console.log('this form is not valid');
       console.log('====================================');
@@ -144,10 +147,15 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
 
     this.httpService.sendContactMessage(this.form.value)
       .subscribe(res => {
+        alert('הודעה נשלחה, נחזור אלייך בהקדם!')
         console.log('====================================');
         console.log(res);
         console.log('====================================');
-      });
+      },
+        e => {
+          alert('אופס, הטופס נתקע, אנא שלח לנו את ההודעה בוואטאפ');
+        }
+      );
   }
 
   ngOnDestroy() {

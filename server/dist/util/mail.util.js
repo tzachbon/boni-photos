@@ -35,36 +35,80 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var body_parser_1 = require("body-parser");
-var express_1 = __importDefault(require("express"));
-var path_1 = __importDefault(require("path"));
-var headers_controller_1 = require("./controller/headers.controller");
-var health_check_controller_1 = require("./controller/health-check.controller");
-var contact_routes_1 = __importDefault(require("./routes/contact.routes"));
-var counter_util_1 = require("./util/counter.util");
-var counter = new counter_util_1.Counter();
-var app = express_1.default();
-var port = process.env.PORT || 3088;
-app.use('/', express_1.default.static(path_1.default.join(__dirname, 'frontend')));
-app.use('/api', body_parser_1.json({ limit: '500mb' }));
-app.use(body_parser_1.urlencoded({ limit: '500mb', extended: true }));
-app.use(headers_controller_1.headersController);
-app.use('/api/contact-us', contact_routes_1.default);
-app.use('/api', health_check_controller_1.healthCheckController);
-app.use('/', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        counter.updateCounter();
-        next();
-        return [2];
+var nodemailer_1 = require("nodemailer");
+var Mailer = (function () {
+    function Mailer(subject, text, to) {
+        this.auth = {
+            user: 'BoniPhotosInc@gmail.com',
+            pass: 'boni123456'
+        };
+        if (subject) {
+            this.setNewSubject(subject);
+        }
+        if (text) {
+            this.setNewText(text);
+        }
+        this.mail = this.initMailMetaData();
+        this.mailOptions = this.initMailOptions(to);
+    }
+    Object.defineProperty(Mailer.prototype, "mailInfo", {
+        get: function () {
+            return {
+                subject: this.subject,
+                text: this.text
+            };
+        },
+        enumerable: true,
+        configurable: true
     });
-}); });
-app.use(function (req, res, next) {
-    res.sendFile(path_1.default.join(__dirname, 'frontend', 'index.html'));
-});
-app.listen(port);
-console.log("Listening to " + port);
-//# sourceMappingURL=app.js.map
+    Mailer.prototype.initMailMetaData = function () {
+        return nodemailer_1.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: this.auth
+        });
+    };
+    Mailer.prototype.initMailOptions = function (toWho) {
+        var to = toWho || this.auth.user;
+        var subject = this.subject || this.setNewSubject();
+        var text = this.text || this.setNewText();
+        return {
+            from: this.auth.user,
+            to: to,
+            subject: subject,
+            text: text
+        };
+    };
+    Mailer.prototype.setNewSubject = function (subject) {
+        if (subject === void 0) { subject = 'nodemailer test'; }
+        this.subject = subject;
+        return this.subject;
+    };
+    Mailer.prototype.setNewText = function (text) {
+        if (text === void 0) { text = 'node text'; }
+        this.text = text;
+        return this.text;
+    };
+    Mailer.prototype.send = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (res, rej) {
+                        _this.mail.sendMail(_this.mailOptions, function (err, info) {
+                            if (err) {
+                                rej(err);
+                            }
+                            if (info) {
+                                res(info);
+                            }
+                        });
+                    })];
+            });
+        });
+    };
+    return Mailer;
+}());
+exports.Mailer = Mailer;
+//# sourceMappingURL=mail.util.js.map

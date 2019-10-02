@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  BASE_URL: 'https://boni-photos.herokuapp.com'
+  BASE_URL: 'https://boni-photo.herokuapp.com'
 };

@@ -35,36 +35,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var body_parser_1 = require("body-parser");
-var express_1 = __importDefault(require("express"));
-var path_1 = __importDefault(require("path"));
-var headers_controller_1 = require("./controller/headers.controller");
-var health_check_controller_1 = require("./controller/health-check.controller");
-var contact_routes_1 = __importDefault(require("./routes/contact.routes"));
-var counter_util_1 = require("./util/counter.util");
-var counter = new counter_util_1.Counter();
-var app = express_1.default();
-var port = process.env.PORT || 3088;
-app.use('/', express_1.default.static(path_1.default.join(__dirname, 'frontend')));
-app.use('/api', body_parser_1.json({ limit: '500mb' }));
-app.use(body_parser_1.urlencoded({ limit: '500mb', extended: true }));
-app.use(headers_controller_1.headersController);
-app.use('/api/contact-us', contact_routes_1.default);
-app.use('/api', health_check_controller_1.healthCheckController);
-app.use('/', function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+exports.healthCheckController = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        counter.updateCounter();
-        next();
+        console.log('====================================');
+        console.log('Someone did health check!');
+        console.log('====================================');
+        res.send('We are good to go!');
         return [2];
     });
-}); });
-app.use(function (req, res, next) {
-    res.sendFile(path_1.default.join(__dirname, 'frontend', 'index.html'));
-});
-app.listen(port);
-console.log("Listening to " + port);
-//# sourceMappingURL=app.js.map
+}); };
+//# sourceMappingURL=health-check.controller.js.map
