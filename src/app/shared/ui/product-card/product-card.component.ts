@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { IProduct } from '../../models/product.interface';
 import { SectionService } from 'src/app/shared/services/section.service';
+import { UtilService } from '../../services/util/util.service';
 
 
 
@@ -14,6 +15,7 @@ export class ProductCardComponent implements OnInit {
   @Input() product: IProduct;
   constructor(
     private cd: ChangeDetectorRef,
+    private utilService: UtilService,
     private sectionService: SectionService,
   ) { }
 
@@ -22,6 +24,11 @@ export class ProductCardComponent implements OnInit {
 
   onChooseProduct() {
     this.sectionService.chooseProduct(this.product);
+  }
+
+  sendMessage() {
+    const message = this.utilService.getProductMessage(this.product);
+    this.utilService.sendMessageViaWhatsapp(message);
   }
 
 

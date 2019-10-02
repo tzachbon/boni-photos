@@ -50,9 +50,9 @@ var counter = new counter_util_1.Counter();
 var app = express_1.default();
 var port = process.env.PORT || 3088;
 app.use('/', express_1.default.static(path_1.default.join(__dirname, 'frontend')));
-app.use('/api', body_parser_1.json({ limit: '500mb' }));
 app.use(body_parser_1.urlencoded({ limit: '500mb', extended: true }));
 app.use(headers_controller_1.headersController);
+app.use('/api', body_parser_1.json({ limit: '500mb' }));
 app.use('/api/contact-us', contact_routes_1.default);
 app.use('/api', health_check_controller_1.healthCheckController);
 app.use('/', function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
@@ -62,7 +62,7 @@ app.use('/', function (req, res, next) { return __awaiter(_this, void 0, void 0,
         return [2];
     });
 }); });
-app.use(function (req, res, next) {
+app.use('/', function (req, res, next) {
     res.sendFile(path_1.default.join(__dirname, 'frontend', 'index.html'));
 });
 app.listen(port);

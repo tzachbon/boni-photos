@@ -58,29 +58,27 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
   }
 
   initProductChosenObservable() {
-    const product$ = this.sectionService.chosenProduct$
-      .pipe(filter(prd => !!prd))
-      .subscribe(product => {
-        this.fullPageService.moveTo(3);
-        if (this.messageRef) {
-          let value = this.messageRef.nativeElement.value;
-          if (value.length) {
-            value = this.messageRef.nativeElement.value + ' ' + this.getProductMessage(product);
-          } else {
-            value = this.getProductMessage(product);
-          }
+    // const product$ = this.sectionService.chosenProduct$
+    //   .pipe(filter(prd => !!prd))
+    //   .subscribe(product => {
+    //     this.fullPageService.moveTo(3);
+    //     if (this.messageRef) {
+    //       let value = this.messageRef.nativeElement.value;
+    //       if (value.length) {
+    //         value = this.messageRef.nativeElement.value + ' ' + this.getProductMessage(product);
+    //       } else {
+    //         value = this.getProductMessage(product);
+    //       }
 
-          this.form.get('message').setValue(value);
-          this.form.updateValueAndValidity();
-          this.cd.detectChanges();
-        }
-      });
-    this.subscription.add(product$);
+    //       this.form.get('message').setValue(value);
+    //       this.form.updateValueAndValidity();
+    //       this.cd.detectChanges();
+    //     }
+    //   });
+    // this.subscription.add(product$);
   }
 
-  getProductMessage(product: IProduct) {
-    return `היי רציתי לשאול לגבי ${product.title}`;
-  }
+
 
   getAutoComplete(control: ContactUsFormControl) {
     switch (control) {
