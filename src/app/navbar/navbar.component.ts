@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { MobileService } from '../shared/services/mobile/mobile.service';
 import { RoutesService } from '../shared/services/routes.service';
 import { UtilService } from '../shared/services/util/util.service';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 interface Section {
   name: string;
@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   navOpen: boolean;
   changeBackground = false;
   subscription = new Subscription();
+  isFirstRoute$: Observable<any>;
 
   constructor(
     private cd: ChangeDetectorRef,
@@ -31,21 +32,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.initCurrentRouteObservable();
+    this.initIsFirstRoute$();
     this.initSections();
     this.initNavOpen();
   }
 
-  initCurrentRouteObservable() {
+  initIsFirstRoute$() {
     const firstRouteName = this.routesService.routesNames[0];
-    const route$ = this.routesService.currentRoute$
-      .asObservable()
-      .pipe(map(routeName => routeName !== firstRouteName))
-      .subscribe(isNotFirst => {
-        this.changeBackground = isNotFirst;
-        this.cd.detectChanges();
-      });
-    this.subscription.add(route$);
+    this.isFirstRoute$ = this.routesService.currentRoute$
+      .pipe(map(routeName => routeName !== firstRouteName));
   }
 
 
@@ -79,7 +74,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   toggleNav() {
     this.navOpen = !this.navOpen;
   }
-
+ 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }

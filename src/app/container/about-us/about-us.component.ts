@@ -33,9 +33,6 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initFullPageObservable();
     this.initSections();
-    console.log('====================================');
-    console.log(this.show);
-    console.log('====================================');
   }
 
   initSections() {

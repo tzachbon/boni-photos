@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 
 
@@ -17,10 +18,12 @@ export class RoutesService {
   currentRoute$ = new Subject<string>();
   constructor(public router: Router, public route: ActivatedRoute) {
     this.initRouteStatues();
+    this.initCurrentRouteObservable();
     this.initRoutesNames();
   }
 
   private set _currentRoute(name: string) {
+    console.log('Current Route Set To ==> ', name);
     this.currentRoute$.next(name);
   }
 
@@ -38,7 +41,21 @@ export class RoutesService {
     });
   }
 
-  navigateToRoute(move: 'up' | 'down') {
+  get routeNavigationEnd$(): Observable<any> {
+    return this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd));
+  }
+
+  private initCurrentRouteObservable() {
+    this.routeNavigationEnd$
+      .subscribe((event: NavigationEnd) => {
+        const url = event.url.replace('/', '');
+        const routeName = this.getRouteNameByPath(url);
+        this._currentRoute = routeName;
+      });
+  }
+
+  navigateToRoute(move: 'up' | 'down'): boolean {
     let nextRoute: string;
     const currentRouteIndex = this.routesNames.indexOf(this.currentRoute as string);
     switch (move) {
@@ -49,7 +66,7 @@ export class RoutesService {
           this.routeStatues[nextRoute] = true;
           this.routeStatues[this.currentRoute] = false;
         } else {
-          return;
+          return false;
         }
         break;
 
@@ -60,15 +77,16 @@ export class RoutesService {
           this.routeStatues[nextRoute] = true;
           this.routeStatues[this.currentRoute] = false;
         } else {
-          return;
+          return false;
         }
         break;
     }
     if (nextRoute) {
-      this._currentRoute = nextRoute;
       const path = this.getRoutePathByName(nextRoute);
       this.navigateTo(`/${path}`);
+      return true;
     }
+    return false;
   }
 
   getRoutePathByName(name: string): string {
@@ -98,8 +116,6 @@ export class RoutesService {
   }
 
   navigateTo(path: any) {
-    const routeName = this.getRouteNameByPath(path);
-    this._currentRoute = routeName;
     this.router.navigate([path], { relativeTo: this.route });
   }
 

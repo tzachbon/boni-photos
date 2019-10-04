@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { fromEvent, Subscription } from 'rxjs';
-import { filter, throttleTime } from 'rxjs/operators';
+import { RouterOutlet, NavigationEnd } from '@angular/router';
+import { fromEvent, Subscription, merge } from 'rxjs';
+import { filter, throttleTime, delay } from 'rxjs/operators';
 import { routerAnimation } from './shared/animations/router.animation';
 import { RoutesService } from './shared/services/routes.service';
 
@@ -17,17 +17,24 @@ import { RoutesService } from './shared/services/routes.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
-  shouldScrollToMain = true;
+  shouldScroll = true;
   constructor(
-    private zone: NgZone,
     private routesService: RoutesService,
-    @Inject(DOCUMENT) private document: Document,
   ) {
 
   }
 
   ngOnInit() {
-    this.initWheelDetector();
+    this.initRouteNavigationEnd$();
+    this.initScrollDetector();
+  }
+
+  initRouteNavigationEnd$() {
+    this.routesService.routeNavigationEnd$
+      .pipe(delay(1000))
+      .subscribe((event: NavigationEnd) => {
+        this.shouldScroll = true;
+      });
   }
 
   initScrollObservable(event: WheelEvent) {
@@ -37,41 +44,46 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
     const isUp = event.deltaY < 0;
-    if (this.shouldScrollToMain) {
-      this.shouldScrollToMain = false;
+    if (this.shouldScroll) {
+      this.shouldScroll = false;
       if (!isUp) {
-        this.zone.run(this.navigate.bind(this, 'down'));
+        this.navigate('down');
 
       } else {
-        this.zone.run(this.navigate.bind(this, 'up'));
+        this.navigate('up');
       }
-    } else {
-      this.shouldScrollToMain = true;
     }
 
   }
 
   navigate(state: 'up' | 'down') {
     setTimeout(() => {
-      this.routesService.navigateToRoute(state);
-      setTimeout(() => {
-        this.shouldScrollToMain = true;
-      }, 500, this);
+      const isNavigated = this.routesService.navigateToRoute(state);
+      if (!isNavigated) {
+        this.shouldScroll = true;
+      }
     }, 300, this);
   }
 
-  initWheelDetector() {
-    this.zone.runOutsideAngular(this.onWheelDetector.bind(this));
+  initScrollDetector() {
+    this.onScrollDetector();
   }
 
-  onWheelDetector() {
-    const event$ = fromEvent(this.document, 'wheel')
+  onScrollDetector() {
+    const wheel$ = fromEvent(window, 'wheel')
       .pipe(
-        throttleTime(2000),
-        filter((e) => this.shouldScrollToMain)
-      )
+        filter((e) => this.shouldScroll)
+      );
+
+    const scroll$ = fromEvent(window, 'scroll')
+      .pipe(
+        filter((e) => this.shouldScroll)
+      );
+
+    const merge$ = merge(scroll$, wheel$)
       .subscribe((event: WheelEvent) => this.initScrollObservable(event));
-    this.subscription.add(event$);
+
+    this.subscription.add(merge$);
   }
 
   onAnimateRouter(outlet: RouterOutlet) {

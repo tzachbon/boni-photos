@@ -2,7 +2,7 @@
   class="nav"
   [ngClass]="{
     close: !navOpen,
-    colorfulBackground: changeBackground,
+    colorfulBackground: isFirstRoute$ | async,
     mobile: mobileService.isHandset$ | async
   }"
 >
