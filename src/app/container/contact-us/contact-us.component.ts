@@ -56,17 +56,18 @@ export class ContactUsComponent implements OnInit, OnDestroy {
         icon: 'email',
         title: 'אימייל',
         text: 'אנחנו תמיד זמינים דרך המייל boniphoto55@gmail.com',
-        url: 'boniphoto55@gmail.com',
+        url: 'mailto:boniphoto55@gmail.com',
         mobileText: 'boniphoto55@gmail.com',
       },
       {
         icon: 'phone',
         title: 'נייד',
         text: 'תמיד תוכלו למצוא אותנו בנייד 0523635250',
-        url: '0523635250',
+        url: 'tel:972523635250',
         mobileText: '0523635250'
       }
     ]
+    this.cd.detectChanges();
   }
 
   get whatsAppLink(): string {

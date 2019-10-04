@@ -1,28 +1,12 @@
-<!-- <app-navbar> -->
-<app-navbar></app-navbar>
-<div class="router-container" [@routerAnimation]="onAnimateRouter(outlet)">
-  <router-outlet #outlet="outlet"></router-outlet>
-</div>
-<!-- <div mnFullpage>
-  <div class=" fp-section fp-table">
-    <div class="fp-tableCell">
-      <app-land></app-land>
-    </div>
+<ng-container *ngIf="!(mobileService.isHandset$ | async); else mobileRef">
+  <app-navbar></app-navbar>
+  <div class="router-container" [@routerAnimation]="onAnimateRouter(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
   </div>
-  <div class=" fp-section fp-table">
-    <div class="fp-tableCell">
-      <app-about-us></app-about-us>
-    </div>
-  </div>
-  <div class=" fp-section fp-table">
-    <div class="fp-tableCell">
-      <app-products></app-products>
-    </div>
-  </div>
-  <div class=" fp-section fp-table">
-    <div class="fp-tableCell">
-      <app-contact-us></app-contact-us>
-    </div>
-  </div>
-</div> -->
-<!-- </app-navbar> -->
+</ng-container>
+<ng-template #mobileRef>
+  <app-land></app-land>
+  <app-about-us></app-about-us>
+  <app-products></app-products>
+  <app-contact-us></app-contact-us>
+</ng-template>

@@ -1,10 +1,10 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
-import { RouterOutlet, NavigationEnd } from '@angular/router';
-import { fromEvent, Subscription, merge } from 'rxjs';
-import { filter, throttleTime, delay } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationEnd, RouterOutlet } from '@angular/router';
+import { fromEvent, merge, Subscription } from 'rxjs';
+import { delay, filter } from 'rxjs/operators';
 import { routerAnimation } from './shared/animations/router.animation';
 import { RoutesService } from './shared/services/routes.service';
+import { MobileService } from 'src/app/shared/services/mobile/mobile.service';
 
 @Component({
   selector: 'app-root',
@@ -18,15 +18,26 @@ import { RoutesService } from './shared/services/routes.service';
 export class AppComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   shouldScroll = true;
+  lastScrollPosition: number;
+  isMobile: boolean;
   constructor(
     private routesService: RoutesService,
+    public mobileService: MobileService,
   ) {
 
   }
 
   ngOnInit() {
+    this.initMobileObservable();
     this.initRouteNavigationEnd$();
     this.initScrollDetector();
+  }
+
+  initMobileObservable() {
+    const mobile$ = this.mobileService.isHandset$.subscribe(isHandset => {
+      this.isMobile = isHandset;
+    });
+    this.subscription.add(mobile$);
   }
 
   initRouteNavigationEnd$() {
@@ -75,12 +86,9 @@ export class AppComponent implements OnInit, OnDestroy {
         filter((e) => this.shouldScroll)
       );
 
-    const scroll$ = fromEvent(window, 'scroll')
-      .pipe(
-        filter((e) => this.shouldScroll)
-      );
 
-    const merge$ = merge(scroll$, wheel$)
+    const merge$ = merge(wheel$)
+      .pipe(filter(e => !this.isMobile))
       .subscribe((event: WheelEvent) => this.initScrollObservable(event));
 
     this.subscription.add(merge$);
