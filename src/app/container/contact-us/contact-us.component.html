@@ -51,7 +51,11 @@
       class="social-media"
       [@socialMedia]="show && !(mobileService.isHandset$ | async)"
     >
-      <img src="../../../assets/images/contact-us-svg.svg" alt="contact-us" />
+      <img
+        *ngIf="!(mobileService.isHandset$ | async)"
+        src="../../../assets/images/contact-us-svg.svg"
+        alt="contact-us"
+      />
     </div>
   </ng-container>
 </div>
