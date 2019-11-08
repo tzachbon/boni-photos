@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -39,28 +40,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var node_cron_1 = __importDefault(require("node-cron"));
-var mail_util_1 = require("./mail.util");
+var request = require("request-promise");
+var environment_1 = require("../environment");
 var Counter = (function () {
     function Counter() {
-        this.weekly = 0;
-        this.daily = 0;
-        this.sum = 0;
+        this.sendMailEveryDay();
+    }
+    Counter.prototype.initCron = function () {
         node_cron_1.default.schedule('25 5 10 * * *', this.sendMailEveryDay.bind(this));
         node_cron_1.default.schedule('0 0 12 * * FRI', this.sendMailEveryWeek.bind(this));
-    }
+    };
     Counter.prototype.sendMailEveryWeek = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var today, text, MailToAdmin;
+            var data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        today = new Date().toString();
-                        text = "\n    \u05E0\u05DB\u05D5\u05DF \u05DC\u05E2\u05DB\u05E9\u05D9\u05D5:\n    " + today + "\n     \u05E0\u05DB\u05E0\u05E1\u05D5 \u05D4\u05E9\u05D1\u05D5\u05E2 " + this.weekly + "\n\n     \u05E1\u05DA \u05D4\u05DB\u05DC \u05E0\u05DB\u05E0\u05E1\u05D5 \u05DC\u05DE\u05E2\u05E8\u05DB\u05EA:\n     " + this.sum + "\n    ";
-                        MailToAdmin = new mail_util_1.Mailer("\u05D4\u05E9\u05D1\u05D5\u05E2 \u05D4\u05D9\u05D5 " + this.weekly + " \u05DB\u05E0\u05D9\u05E1\u05D5\u05EA", text);
-                        return [4, MailToAdmin.send()];
+                    case 0: return [4, request(environment_1.environment.BASE_URL)];
                     case 1:
-                        _a.sent();
-                        this.setWeeklyCount(0);
+                        data = _a.sent();
+                        console.log('====================================');
+                        console.log(data);
+                        console.log('====================================');
                         return [2];
                 }
             });
@@ -68,54 +68,11 @@ var Counter = (function () {
     };
     Counter.prototype.sendMailEveryDay = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var today, text, MailToAdmin;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        today = new Date().toString();
-                        text = "\n    \u05E0\u05DB\u05D5\u05DF \u05DC\u05E2\u05DB\u05E9\u05D9\u05D5:\n    " + today + "\n    \u05E0\u05DB\u05E0\u05E1\u05D5 \u05D4\u05D9\u05D5\u05DD " + this.daily + "\n    \u05E0\u05DB\u05E0\u05E1\u05D5 \u05D4\u05E9\u05D1\u05D5\u05E2 " + this.weekly + "\n    \u05E0\u05DB\u05E0\u05E1\u05D5 \u05E1\u05DA \u05D4\u05DB\u05DC " + this.sum + "\n    ";
-                        MailToAdmin = new mail_util_1.Mailer("\u05D4\u05D9\u05D5\u05DD \u05D4\u05D9\u05D5 " + this.daily + " \u05DB\u05E0\u05D9\u05E1\u05D5\u05EA", text);
-                        return [4, MailToAdmin.send()];
-                    case 1:
-                        _a.sent();
-                        this.setDailyCount(0);
-                        return [2];
-                }
+                return [2];
             });
         });
     };
-    Counter.prototype.setWeeklyCount = function (weekly) {
-        this.weekly = weekly;
-    };
-    Counter.prototype.setDailyCount = function (daily) {
-        this.daily = daily;
-    };
-    Counter.prototype.updateCounter = function () {
-        this.daily++;
-        this.weekly++;
-        this.sum++;
-    };
-    Object.defineProperty(Counter.prototype, "totalEnters", {
-        get: function () {
-            return this.sum;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Counter.prototype, "weeklyCount", {
-        get: function () {
-            return this.weekly;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Counter.prototype, "dailyCount", {
-        get: function () {
-            return this.daily;
-        },
-        enumerable: true,
-        configurable: true
-    });
     return Counter;
 }());
 exports.Counter = Counter;

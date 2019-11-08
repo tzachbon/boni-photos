@@ -13,5 +13,5 @@ export declare class Mailer {
     private initMailOptions;
     setNewSubject(subject?: string): string;
     setNewText(text?: string): string;
-    send(): Promise<{}>;
+    send(): Promise<unknown>;
 }
