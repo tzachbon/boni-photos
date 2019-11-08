@@ -16,7 +16,7 @@ app.use('/api', healthCheckController);
 
 
 app.use((req, res, next) => {
-  // res.redirect('https://boni-photos.web.app');
+  res.redirect('https://boni-photos.web.app');
 });
 
 
