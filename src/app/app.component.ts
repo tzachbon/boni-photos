@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { NavigationEnd, RouterOutlet } from '@angular/router';
 import { fromEvent, merge, Subscription } from 'rxjs';
 import { delay, filter } from 'rxjs/operators';
 import { routerAnimation } from './shared/animations/router.animation';
 import { RoutesService } from './shared/services/routes.service';
 import { MobileService } from 'src/app/shared/services/mobile/mobile.service';
+import { ContactUsComponent } from './container/contact-us/contact-us.component';
+import { HttpService } from './shared/services/http/http.service';
 
 @Component({
   selector: 'app-root',
@@ -15,22 +17,46 @@ import { MobileService } from 'src/app/shared/services/mobile/mobile.service';
     routerAnimation
   ]
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   subscription = new Subscription();
   shouldScroll = true;
   lastScrollPosition: number;
   isMobile: boolean;
+  moveToContactUs = false;
+
+  @ViewChild('contactUsRef', { static: false }) contactUsRef: ContactUsComponent;
+
   constructor(
     private routesService: RoutesService,
     public mobileService: MobileService,
+    private http: HttpService,
   ) {
-
+    this.navigateToContactUsMobile();
   }
 
   ngOnInit() {
     this.initMobileObservable();
     this.initRouteNavigationEnd$();
     this.initScrollDetector();
+    this.updateUserEntered();
+  }
+
+  ngAfterViewInit() {
+    if (this.moveToContactUs) {
+      setTimeout(() => {
+        this.contactUsRef.scrollTo();
+      }, 500);
+    }
+  }
+
+  updateUserEntered() {
+    this.http.updateUser().subscribe();
+  }
+
+  navigateToContactUsMobile() {
+    const isMobile = window.innerWidth < 600;
+    const isOnContactUs = window.location.pathname.toLowerCase().includes('contact');
+    this.moveToContactUs = isMobile && isOnContactUs;
   }
 
   initMobileObservable() {

@@ -43,6 +43,12 @@ export class ContactUsComponent implements OnInit, OnDestroy {
     this.initContactUsButtons();
   }
 
+  public scrollTo() {
+    if (this.section) {
+      this.section.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'end' })
+    }
+  }
+
   initContactUsButtons() {
     this.contactUsButtons = [
       {

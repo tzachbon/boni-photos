@@ -33,6 +33,12 @@
     </ng-container>
   </mat-form-field>
   <button class="submit" [disabled]="isFormValid">
-    <span>{{ submitButtonText }}</span> <mat-icon class="mat-18">send</mat-icon>
+    <ng-container *ngIf="!(loading$ | async); else loadingRef">
+      <span>{{ submitButtonText }}</span>
+      <mat-icon class="mat-18">send</mat-icon>
+    </ng-container>
+    <ng-template #loadingRef>
+      <mat-spinner color="accent" [diameter]="24"></mat-spinner>
+    </ng-template>
   </button>
 </form>

@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { MobileService } from '../../shared/services/mobile/mobile.service';
 import { RoutesService } from '../../shared/services/routes.service';
 import { slideTo } from 'src/app/shared/animations/animations';
+import { fadeInDownOnEnterAnimation } from 'angular-animations';
+
 
 const slideXRight = slideTo('X', '-0rem', '1s', 'slideXRight', '-10rem');
 const slideXLeft = slideTo('X', '0rem', '1s', 'slideXLeft', '10rem');
@@ -15,7 +17,7 @@ const slideYDown = slideTo('Y', '22rem', '1s', 'slideYDown');
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [slideYUp, slideYDown, slideXLeft, slideXRight],
+  animations: [slideYUp, slideYDown, slideXLeft, slideXRight, fadeInDownOnEnterAnimation()],
 })
 export class AboutUsComponent implements OnInit, OnDestroy {
   show = false;
@@ -33,6 +35,7 @@ export class AboutUsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initFullPageObservable();
     this.initSections();
+
   }
 
   initSections() {

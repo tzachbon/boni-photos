@@ -15,7 +15,7 @@
       *ngFor="let section of sections; let i = index"
       (click)="moveTo(i)"
     >
-      {{ section.display }}
+      {{ section.display | titlecase }}
     </div>
   </ng-container>
 </div>

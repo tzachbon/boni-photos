@@ -1,13 +1,16 @@
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
-import { IProduct } from '../../shared/models/product.interface';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { bounceOnEnterAnimation } from 'angular-animations';
 import { SectionService } from 'src/app/shared/services/section.service';
-import { ISection } from '../../shared/services/section.service';
+import { IProduct } from '../../shared/models/product.interface';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    bounceOnEnterAnimation()
+  ]
 })
 export class ProductsComponent implements OnInit {
   products: IProduct[] = [];

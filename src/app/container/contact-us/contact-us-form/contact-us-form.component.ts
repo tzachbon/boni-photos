@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 import { FullpageService } from 'src/app/shared/services/fullpage/fullpage.service';
-import { filter, debounceTime } from 'rxjs/operators';
-import { SectionService } from 'src/app/shared/services/section.service';
-import { IProduct } from 'src/app/shared/models/product.interface';
 import { HttpService } from '../../../shared/services/http/http.service';
 
 type ContactUsFormControl = 'fullName' | 'message' | 'email' | 'phone';
@@ -21,12 +19,13 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
   submitButtonText = `צור איתנו קשר`;
   @ViewChild('formRef', { static: true }) formRef: ElementRef<HTMLFormElement>;
   @ViewChildren('inputRef') inputRef: QueryList<ElementRef<MatInput>>;
-  subscription = new Subscription();
   @ViewChild('messageRef', { static: false }) messageRef: ElementRef<MatInput>;
+
+  subscription = new Subscription();
+  loading$ = new BehaviorSubject(false);
+
   constructor(
-    private cd: ChangeDetectorRef,
     private fullPageService: FullpageService,
-    private sectionService: SectionService,
     private httpService: HttpService,
   ) { }
 
@@ -115,7 +114,7 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
       case 'fullName':
         return 'שם פרטי';
       case 'message':
-        return 'מה בא לך להגיע לנו...';
+        return 'מה בא לך להגיד לנו...';
       case 'email':
         return 'אימייל';
       case 'phone':
@@ -143,14 +142,17 @@ export class ContactUsFormComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.loading$.next(true);
     this.httpService.sendContactMessage(this.form.value)
       .subscribe(res => {
         alert('הודעה נשלחה, נחזור אלייך בהקדם!')
         console.log('====================================');
         console.log(res);
         console.log('====================================');
+        this.loading$.next(false);
       },
         e => {
+          this.loading$.next(false);
           alert('אופס, הטופס נתקע, אנא שלח לנו את ההודעה בוואטאפ');
         }
       );

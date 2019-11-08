@@ -11,7 +11,6 @@ export class ServerInterceptor implements HttpInterceptor {
   intercept<T>(req: HttpRequest<T>, next: HttpHandler): Observable<HttpEvent<T>> {
     const started = Date.now();
     const reqClone = req.clone({
-      url: environment.BASE_URL + req.url
     });
 
     return next.handle(reqClone).pipe(
