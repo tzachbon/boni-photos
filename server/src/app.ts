@@ -3,15 +3,15 @@ import express from 'express';
 import { headersController } from './controller/headers.controller';
 import { healthCheckController } from './controller/health-check.controller';
 import { Counter } from './util/counter.util';
-import request = require('request-promise');
-import { environment } from './environment';
+import UserRouter from './routes/user.routes';
 
+export let counter: Counter;
 const app: express.Application = express();
 const port = process.env.PORT || 3088;
 
-
 app.use(urlencoded({ limit: '500mb', extended: true }));
 app.use(headersController);
+app.use('/api/users', UserRouter);
 app.use('/api', healthCheckController);
 
 
@@ -23,6 +23,6 @@ app.use((req, res, next) => {
 
 
 app.listen(port, async () => {
-  const counter = new Counter();
+  counter = new Counter();
   console.log(`Listening to ${port}`);
 });

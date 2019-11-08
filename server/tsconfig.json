@@ -17,6 +17,6 @@
     "lib": ["es2017", "dom"],
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*", "../functions/src/models"],
+  "include": ["src/**/*"],
   "exclude": ["typings/browser.d.ts", "typings/browser", "node_modules"]
 }

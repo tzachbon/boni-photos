@@ -40,11 +40,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var node_cron_1 = __importDefault(require("node-cron"));
-var request = require("request-promise");
 var environment_1 = require("../environment");
+var mail_util_1 = require("./mail.util");
+var request = require("request-promise");
+var moment = require("moment");
 var Counter = (function () {
     function Counter() {
-        this.sendMailEveryDay();
+        this.initCron();
     }
     Counter.prototype.initCron = function () {
         node_cron_1.default.schedule('25 5 10 * * *', this.sendMailEveryDay.bind(this));
@@ -52,15 +54,22 @@ var Counter = (function () {
     };
     Counter.prototype.sendMailEveryWeek = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var data;
+            var userData, userDetails, text, mail;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, request(environment_1.environment.BASE_URL)];
+                    case 0: return [4, this.getUsersData()];
                     case 1:
-                        data = _a.sent();
-                        console.log('====================================');
-                        console.log(data);
-                        console.log('====================================');
+                        userData = _a.sent();
+                        userDetails = {
+                            numberOfUsers: Object.keys(userData).filter(function (user, i, arr) { return arr.indexOf(user) === i; }).length,
+                            entersPerUser: this.getEntersPerUser(userData),
+                            avgPerUser: this.getAvgTime(userData)
+                        };
+                        text = JSON.stringify(userDetails);
+                        mail = new mail_util_1.Mailer('פירוט שבועי', text);
+                        return [4, mail.send()];
+                    case 2:
+                        _a.sent();
                         return [2];
                 }
             });
@@ -68,8 +77,63 @@ var Counter = (function () {
     };
     Counter.prototype.sendMailEveryDay = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var userData, userDetails, text, mail;
             return __generator(this, function (_a) {
-                return [2];
+                switch (_a.label) {
+                    case 0: return [4, this.getUsersData()];
+                    case 1:
+                        userData = _a.sent();
+                        userDetails = {
+                            numberOfUsers: Object.keys(userData).filter(function (user, i, arr) { return arr.indexOf(user) === i; }).length,
+                            entersPerUser: this.getEntersPerUser(userData),
+                            avgPerUser: this.getAvgTime(userData)
+                        };
+                        text = JSON.stringify(userDetails);
+                        mail = new mail_util_1.Mailer('פירוט יומי', text);
+                        return [4, mail.send()];
+                    case 2:
+                        _a.sent();
+                        return [2];
+                }
+            });
+        });
+    };
+    Counter.prototype.getEntersPerUser = function (data) {
+        var newObject = {};
+        Object.entries(data).forEach(function (_a) {
+            var _b;
+            var key = _a[0], value = _a[1];
+            if (!!value && typeof value === 'object') {
+                Object.assign(newObject, (_b = {}, _b[key] = Object.keys(value).length, _b));
+            }
+        });
+        return newObject;
+    };
+    Counter.prototype.getAvgTime = function (data) {
+        var newObject = {};
+        Object.entries(data).forEach(function (_a) {
+            var _b;
+            var key = _a[0], value = _a[1];
+            if (!!value && typeof value === 'object') {
+                var total_1 = 0;
+                var valuesArray = Object.values(value);
+                valuesArray.map(function (_a) {
+                    var date = _a.date;
+                    return new Date(date);
+                }).forEach(function (date) {
+                    if (!!date && moment(date).isValid()) {
+                        total_1 += +moment(date).hour();
+                    }
+                });
+                Object.assign(newObject, (_b = {}, _b[key] = (total_1 / valuesArray.length), _b));
+            }
+        });
+        return newObject;
+    };
+    Counter.prototype.getUsersData = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, request(environment_1.environment.BASE_URL + "/users.json").then(function (data) { return JSON.parse(data); })];
             });
         });
     };

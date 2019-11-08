@@ -1,14 +1,13 @@
 import cron from 'node-cron';
+import { environment } from '../environment';
 import { Mailer } from './mail.util';
 import request = require('request-promise');
-import { environment } from '../environment';
 import moment = require('moment')
-import { generateText } from './generate-text.util';
 export class Counter {
 
 
   constructor() {
-    // // this.initCron();
+    this.initCron();
   }
 
   initCron() {

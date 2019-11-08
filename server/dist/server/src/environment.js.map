@@ -1,1 +1,0 @@
-{"version":3,"file":"environment.js","sourceRoot":"","sources":["../../../src/environment.ts"],"names":[],"mappings":";;AACa,QAAA,WAAW,GAAG;IACzB,QAAQ,EAAE,qCAAqC;CAChD,CAAC","sourcesContent":["\nexport const environment = {\n  BASE_URL: 'https://boni-photos.firebaseio.com/'\n};\n"]}
