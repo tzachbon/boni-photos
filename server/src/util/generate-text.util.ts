@@ -1,5 +1,4 @@
-import { IMessage } from '../../../functions/src/models/message.interface';
-export const generateText = (userData: IMessage) => {
+export const generateText = (userData: any) => {
   const stringDate = new Date().toString();
   return `
   היי, נכון לעכשיו ${stringDate},

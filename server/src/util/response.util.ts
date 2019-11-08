@@ -1,7 +1,6 @@
 
-import { IResponse } from '../../../functions/src/models/response.interface';
 
-export const responseHelper = <T>(body: T, isValid = true): IResponse<T> => {
+export const responseHelper = <T>(body: T, isValid = true): any => {
   if (!isValid) {
     console.log('====================================');
     console.log('ERROR::', body);
