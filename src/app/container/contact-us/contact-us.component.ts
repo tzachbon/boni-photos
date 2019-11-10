@@ -68,16 +68,16 @@ export class ContactUsComponent implements OnInit, OnDestroy {
       {
         icon: 'phone',
         title: 'נייד',
-        text: 'תמיד תוכלו למצוא אותנו בנייד 0523635250',
-        url: 'tel:972523635250',
-        mobileText: '0523635250'
+        text: 'תמיד תוכלו למצוא אותנו בנייד 0559123336',
+        url: 'tel:972559123336',
+        mobileText: '0559123336'
       }
     ]
     this.cd.detectChanges();
   }
 
   get whatsAppLink(): string {
-    const phoneNumber = '972523635250';
+    const phoneNumber = '972559123336';
     const text = 'היי הגעתי דרך האתר Boni';
     const generatedText = text.split(' ').join('%20');
     return `https://wa.me/${phoneNumber}?text=${generatedText}`;

@@ -7,7 +7,7 @@ type ISplitBy = ' ' | '-';
   providedIn: 'root'
 })
 export class UtilService {
-  adminPhone = '972523635250';
+  adminPhone = '972559123336';
   constructor() { }
 
   titlecaseString(str: string, splitBy: ISplitBy = '-') {
