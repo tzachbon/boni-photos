@@ -260,7 +260,7 @@ export const emailTemplate = `
         <div class="body">נכון לתאריך: {{ date }}</div>
         <ul class="users-container">
           <li class="fullName">שם מלא: {{ fullName }}</li>
-          <li class="number">מספר נייד: {{ number }}</li>
+          <li class="number">מספר נייד: {{ phone }}</li>
           <li class="email">כתובת אימייל: {{ email }}</li>
           <span style="margin-top: 5rem;" class="message-title">
             תוכן ההודעה:
